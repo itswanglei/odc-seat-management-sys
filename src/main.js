@@ -1,8 +1,22 @@
-import Vue from 'vue'
-import App from './App.vue'
+import Vue from "vue";
+import VueRouter from "vue-router";
 
-Vue.config.productionTip = false
+import App from "./App.vue";
+import GreenRegion from "./components/GreenRegion.vue";
+import BlueRegion from "./components/BlueRegion.vue";
+
+Vue.config.productionTip = false;
+
+Vue.use(VueRouter);
+
+const router = new VueRouter({
+  routes: [
+    { path: "/green-region", component: GreenRegion },
+    { path: "/blue-region", component: BlueRegion },
+  ],
+});
 
 new Vue({
-  render: h => h(App),
-}).$mount('#app')
+  router,
+  render: (h) => h(App),
+}).$mount("#app");
