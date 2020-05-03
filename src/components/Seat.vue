@@ -1,5 +1,5 @@
 <template>
-  <div class="seat-wrapper" :class="orientation" @click="$emit('edit-seat-info', seatInfo)">
+  <div class="seat-wrapper" :class="orientation" @click="$emit('edit-seat-info')">
     <img class="seat-img" :src="imgSrc" />
   </div>
 </template>
@@ -22,25 +22,14 @@ export default {
         return ["top", "left", "right", "bottom"].indexOf(value) !== -1;
       }
     },
-    seatInfo: {
-      type: Object,
-      default() {
-        return {
-          seatId: "",
-          monitor1: "",
-          monitor2: "",
-          monitor3: "",
-          macmini: "",
-          tc: "",
-          user: "",
-          phone: ""
-        };
-      }
+    user: {
+      type: String,
+      default: ""
     }
   },
   computed: {
     isAvailable() {
-      return !this.seatInfo.user;
+      return !this.user;
     },
     imgSrc() {
       return this.isPicked
