@@ -1,6 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
+import "./element-ui";
+
 import App from "./App.vue";
 import GreenRegion from "./components/GreenRegion.vue";
 import BlueRegion from "./components/BlueRegion.vue";
