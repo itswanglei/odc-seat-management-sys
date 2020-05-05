@@ -26,18 +26,14 @@
 </template>
 
 <script>
-import { getGreenRegionData } from "./js/processData";
+import { getGreenRegionData, getGreenRegionStatistics } from "./js/processData";
 
 export default {
   name: "App",
   data() {
     return {
       keywords: "",
-      statistics: {
-        total: 0,
-        availiable: 0,
-        occupied: 0
-      },
+      statistics: getGreenRegionStatistics(),
       seatsData: getGreenRegionData()
     };
   },

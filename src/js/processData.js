@@ -29,3 +29,18 @@ function getSeatGroups(seatsData) {
   }
   return seatGroups;
 }
+
+export const getGreenRegionStatistics = function() {
+  const statistics = {
+    total: 0,
+    availiable: 0,
+    occupied: 0,
+  };
+  const regionData = seatsData["greenRegion"];
+  if (regionData) {
+    statistics.total = regionData.length;
+    statistics.availiable = regionData.filter((item) => !item.user).length;
+    statistics.occupied = regionData.filter((item) => item.user).length;
+  }
+  return statistics;
+};
