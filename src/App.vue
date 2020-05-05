@@ -2,7 +2,7 @@
   <div id="app">
     <el-menu default-active="green-region" mode="horizontal" router>
       <el-menu-item index="green-region">ODC 绿区</el-menu-item>
-      <el-menu-item index="blue-region">ODC 蓝区</el-menu-item>
+      <el-menu-item index="blue-region" disabled>ODC 蓝区</el-menu-item>
       <el-menu-item>
         <el-input
           placeholder="搜索座位编号、设备编号、使用人"
