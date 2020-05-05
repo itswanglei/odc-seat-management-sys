@@ -15,6 +15,7 @@ const router = new VueRouter({
   routes: [
     { path: "/green-region", component: GreenRegion },
     { path: "/blue-region", component: BlueRegion },
+    { path: "/", redirect: "/green-region" },
   ],
 });
 
