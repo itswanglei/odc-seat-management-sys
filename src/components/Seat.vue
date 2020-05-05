@@ -44,8 +44,8 @@ export default {
 
 <style scoped>
 .seat-wrapper {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
 }
 
 .seat-img {
@@ -55,8 +55,8 @@ export default {
 
 .seat-wrapper:hover {
   cursor: pointer;
-  width: 42px;
-  height: 42px;
+  width: 32px;
+  height: 32px;
 }
 
 .left {

@@ -88,7 +88,7 @@ export default {
 }
 
 .table {
-  border-radius: 8px;
+  border-radius: 5px;
   background: rgb(142, 214, 221);
   color: rgb(255, 255, 255);
   font-size: 20px;
@@ -99,12 +99,12 @@ export default {
 }
 
 .horizontal-table {
-  height: 50px;
-  width: 200px;
+  height: 40px;
+  width: 150px;
 }
 
 .vertical-table {
-  width: 50px;
-  height: 200px;
+  width: 40px;
+  height: 150px;
 }
 </style>
