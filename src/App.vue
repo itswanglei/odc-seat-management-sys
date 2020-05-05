@@ -21,11 +21,13 @@
         </div>
       </el-menu-item>
     </el-menu>
-    <router-view></router-view>
+    <router-view :seats-data="seatsData"></router-view>
   </div>
 </template>
 
 <script>
+import { getGreenRegionData } from "./js/processData";
+
 export default {
   name: "App",
   data() {
@@ -35,7 +37,8 @@ export default {
         total: 0,
         availiable: 0,
         occupied: 0
-      }
+      },
+      seatsData: getGreenRegionData()
     };
   },
   methods: {

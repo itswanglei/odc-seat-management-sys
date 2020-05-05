@@ -30,15 +30,11 @@ export default {
     Seat
   },
   props: {
-    tableId: {
-      type: String,
-      default: "A"
-    },
     seats: {
       type: Array,
       default() {
         return Array.apply(null, { length: 10 }).map((item, index) => ({
-          seatId: this.tableId + String(index + 1),
+          seatId: String(index),
           monitor1: "",
           monitor2: "",
           monitor3: "",
@@ -58,6 +54,9 @@ export default {
     }
   },
   computed: {
+    tableId() {
+      return this.seats[0].seatId.slice(0, 1);
+    },
     leftGroup() {
       return this.seats.slice(0, 5);
     },

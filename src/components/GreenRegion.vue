@@ -3,26 +3,26 @@
     <div class="odc-region">
       <div class="horizontal-region">
         <seat-group
-          v-for="(tableId, index) in ['S', 'T', 'U', 'V', 'W', 'X']"
+          v-for="(seats, index) in seatsData.subRegion3"
           :key="index"
-          :tableId="tableId"
+          :seats="seats"
           @edit-seat-info="openEditDialog"
           orientation="horizontal"
         ></seat-group>
       </div>
       <div class="vertical-region">
         <seat-group
-          v-for="(tableId, index) in ['H', 'I', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R']"
+          v-for="(seats, index) in seatsData.subRegion2"
           :key="index"
-          :tableId="tableId"
+          :seats="seats"
           @edit-seat-info="openEditDialog"
         ></seat-group>
       </div>
       <div class="vertical-region">
         <seat-group
-          v-for="(tableId, index) in ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J']"
+          v-for="(seats, index) in seatsData.subRegion1"
           :key="index"
-          :tableId="tableId"
+          :seats="seats"
           @edit-seat-info="openEditDialog"
         ></seat-group>
       </div>
@@ -40,6 +40,18 @@ export default {
   components: {
     "seat-group": SeatGroup,
     "seat-info-form": SeatInfoForm
+  },
+  props: {
+    seatsData: {
+      type: Object,
+      default() {
+        return {
+          subRegion1: [],
+          subRegion2: [],
+          subRegion3: []
+        };
+      }
+    }
   },
   data() {
     return {
