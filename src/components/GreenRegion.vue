@@ -3,7 +3,7 @@
     <div class="odc-region">
       <div class="horizontal-region">
         <seat-group
-          v-for="(tableId, index) in ['R', 'S', 'T', 'U', 'V', 'W']"
+          v-for="(tableId, index) in ['S', 'T', 'U', 'V', 'W', 'X']"
           :key="index"
           :tableId="tableId"
           @edit-seat-info="openEditDialog"
@@ -12,7 +12,7 @@
       </div>
       <div class="vertical-region">
         <seat-group
-          v-for="(tableId, index) in ['H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q']"
+          v-for="(tableId, index) in ['H', 'I', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R']"
           :key="index"
           :tableId="tableId"
           @edit-seat-info="openEditDialog"
