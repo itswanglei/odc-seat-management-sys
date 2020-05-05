@@ -3,17 +3,28 @@
     <div class="odc-region">
       <div class="horizontal-region">
         <seat-group
-          v-for="(seatGroup, index) in 6"
+          v-for="(tableId, index) in ['R', 'S', 'T', 'U', 'V', 'W']"
           :key="index"
+          :tableId="tableId"
           @edit-seat-info="openEditDialog"
           orientation="horizontal"
         ></seat-group>
       </div>
       <div class="vertical-region">
-        <seat-group v-for="(seatGroup, index) in 10" :key="index" @edit-seat-info="openEditDialog"></seat-group>
+        <seat-group
+          v-for="(tableId, index) in ['H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q']"
+          :key="index"
+          :tableId="tableId"
+          @edit-seat-info="openEditDialog"
+        ></seat-group>
       </div>
       <div class="vertical-region">
-        <seat-group v-for="(seatGroup, index) in 9" :key="index" @edit-seat-info="openEditDialog"></seat-group>
+        <seat-group
+          v-for="(tableId, index) in ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J']"
+          :key="index"
+          :tableId="tableId"
+          @edit-seat-info="openEditDialog"
+        ></seat-group>
       </div>
     </div>
     <seat-info-form ref="dialog" v-bind="currentSeatInfo" @submit="saveSeatInfo"></seat-info-form>

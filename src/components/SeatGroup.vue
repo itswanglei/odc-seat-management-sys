@@ -30,11 +30,15 @@ export default {
     Seat
   },
   props: {
+    tableId: {
+      type: String,
+      default: "A"
+    },
     seats: {
       type: Array,
       default() {
         return Array.apply(null, { length: 10 }).map((item, index) => ({
-          seatId: String(index),
+          seatId: this.tableId + String(index + 1),
           monitor1: "",
           monitor2: "",
           monitor3: "",
@@ -60,14 +64,11 @@ export default {
     rightGroup() {
       return this.seats.slice(5);
     },
-    tableId() {
-      return this.seats[0].seatId.slice(0, 1);
-    },
     seatOrientation() {
       return this.orientation === "horizontal"
         ? {
-            leftGroup: "bottom",
-            rightGroup: "top"
+            leftGroup: "top",
+            rightGroup: "bottom"
           }
         : {
             leftGroup: "right",
@@ -81,6 +82,11 @@ export default {
 <style scoped>
 .vertical-wrapper {
   display: flex;
+}
+
+.horizontal-wrapper {
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 .horizontal {
