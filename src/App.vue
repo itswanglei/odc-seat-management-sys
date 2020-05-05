@@ -11,6 +11,15 @@
           @keyup.enter.native="search"
         ></el-input>
       </el-menu-item>
+      <el-menu-item>
+        <div>
+          <span>座位总数 {{statistics.total}}</span>
+          <el-divider direction="vertical"></el-divider>
+          <span>空闲 {{statistics.availiable}}</span>
+          <el-divider direction="vertical"></el-divider>
+          <span>已占用 {{statistics.occupied}}</span>
+        </div>
+      </el-menu-item>
     </el-menu>
     <router-view></router-view>
   </div>
@@ -21,7 +30,12 @@ export default {
   name: "App",
   data() {
     return {
-      keywords: ""
+      keywords: "",
+      statistics: {
+        total: 0,
+        availiable: 0,
+        occupied: 0
+      }
     };
   },
   methods: {
