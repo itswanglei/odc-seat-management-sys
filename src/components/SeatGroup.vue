@@ -5,7 +5,7 @@
         v-for="seat in leftGroup"
         :key="seat.seatId"
         :orientation="seatOrientation.leftGroup"
-        :user="seat.user"
+        :seat="seat"
         @edit-seat-info="$emit('edit-seat-info', seat)"
       ></seat>
     </div>
@@ -15,7 +15,7 @@
         v-for="seat in rightGroup"
         :key="seat.seatId"
         :orientation="seatOrientation.rightGroup"
-        :user="seat.user"
+        :seat="seat"
         @edit-seat-info="$emit('edit-seat-info', seat)"
       ></seat>
     </div>

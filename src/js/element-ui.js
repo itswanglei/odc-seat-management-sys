@@ -8,6 +8,7 @@ import {
   Button,
   Dialog,
   Divider,
+  Popover,
 } from "element-ui";
 
 Vue.use(Menu);
@@ -18,3 +19,4 @@ Vue.use(FormItem);
 Vue.use(Button);
 Vue.use(Dialog);
 Vue.use(Divider);
+Vue.use(Popover);
