@@ -36,11 +36,13 @@ export const getGreenRegionStatistics = function() {
     availiable: 0,
     occupied: 0,
   };
-  const regionData = seatsData["greenRegion"];
-  if (regionData) {
-    statistics.total = regionData.length;
-    statistics.availiable = regionData.filter((item) => !item.user).length;
-    statistics.occupied = regionData.filter((item) => item.user).length;
+  if (seatsData && Object.keys(seatsData).length > 0) {
+    const regionData = seatsData["greenRegion"];
+    if (regionData) {
+      statistics.total = regionData.length;
+      statistics.availiable = regionData.filter((item) => !item.user).length;
+      statistics.occupied = regionData.filter((item) => item.user).length;
+    }
   }
   return statistics;
 };
