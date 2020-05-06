@@ -39,7 +39,9 @@ export default {
   },
   methods: {
     search() {
-      console.log(this.keywords);
+      this.keywords
+        ? this.$store.dispatch("searchSeats", this.keywords)
+        : this.$store.dispatch("resetSeatsState");
     }
   }
 };

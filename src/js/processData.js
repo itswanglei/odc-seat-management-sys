@@ -44,3 +44,16 @@ export const getGreenRegionStatistics = function() {
   }
   return statistics;
 };
+
+export const getSeatsIdByKeywords = function(keywords) {
+  let seatsId = [];
+  if (seatsData && Object.keys(seatsData).length > 0) {
+    const regionData = seatsData["greenRegion"];
+    if (regionData) {
+      seatsId = regionData
+        .filter((item) => Object.values(item).includes(keywords))
+        .map((item) => item.seatId);
+    }
+  }
+  return seatsId;
+};

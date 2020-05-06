@@ -22,16 +22,13 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import availableSeatImg from "../assets/available-seat.svg";
 import occupiedSeatImg from "../assets/occupied-seat.svg";
 import pickedSeatImg from "../assets/pickedSeat.svg";
 
 export default {
   props: {
-    isPicked: {
-      type: Boolean,
-      default: false
-    },
     orientation: {
       type: String,
       default: "top",
@@ -56,11 +53,15 @@ export default {
     }
   },
   computed: {
+    ...mapState(["pickedSeats", "isReset"]),
     isAvailable() {
       return !this.seat.user;
     },
+    isPicked() {
+      return this.pickedSeats.includes(this.seat.seatId);
+    },
     imgSrc() {
-      return this.isPicked
+      return this.isPicked && !this.isReset
         ? pickedSeatImg
         : this.isAvailable
         ? availableSeatImg
