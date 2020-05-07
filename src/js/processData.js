@@ -19,9 +19,13 @@ export const getRegionData = function(region) {
 };
 
 const getGreenRegionData = function(originalData) {
-  const completeData = originalData.concat(
-    generateEmptyRegion(250 - originalData.length)
-  );
+  const totalSeats = 250;
+  const completeData =
+    originalData.length < totalSeats
+      ? originalData.concat(
+          generateEmptyRegion(totalSeats - originalData.length)
+        )
+      : originalData;
 
   return {
     subRegion1: groupSeatsByTable(completeData.slice(0, 90)),
