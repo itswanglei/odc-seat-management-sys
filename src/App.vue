@@ -40,7 +40,10 @@ export default {
   methods: {
     search() {
       this.keywords
-        ? this.$store.dispatch("searchSeats", this.keywords)
+        ? this.$store.dispatch("searchSeats", {
+            keywords: this.keywords,
+            region: this.$route.name
+          })
         : this.$store.dispatch("resetSeatsState");
     }
   }

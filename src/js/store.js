@@ -11,8 +11,8 @@ export default new Vuex.Store({
     isReset: false,
   },
   mutations: {
-    searchSeats(state, keywords) {
-      state.pickedSeats = getSeatsIdByKeywords(keywords);
+    searchSeats(state, { keywords, region }) {
+      state.pickedSeats = getSeatsIdByKeywords(keywords, region);
       state.isReset = false;
     },
     resetSeatsState(state) {
@@ -20,8 +20,8 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    searchSeats({ commit }, keywords) {
-      commit("searchSeats", keywords);
+    searchSeats({ commit }, payload) {
+      commit("searchSeats", payload);
     },
     resetSeatsState({ commit }) {
       commit("resetSeatsState");

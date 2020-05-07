@@ -58,12 +58,12 @@ export const getStatistics = function(region) {
   return result;
 };
 
-export const getSeatsIdByKeywords = function(keywords) {
+export const getSeatsIdByKeywords = function(keywords, region) {
   if (!allSeatsData || Object.keys(allSeatsData).length === 0) {
     return [];
   }
 
-  const regionData = allSeatsData["greenRegion"];
+  const regionData = allSeatsData[region];
 
   if (!regionData || regionData.length === 0) {
     return [];
