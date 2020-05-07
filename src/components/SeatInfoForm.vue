@@ -19,8 +19,11 @@
       <el-form-item label="显示器 #3" prop="monitor3">
         <el-input v-model="form.monitor3" autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item label="Mac mini" prop="macmini">
-        <el-input v-model="form.macmini" autocomplete="off"></el-input>
+      <el-form-item label="Mac mini #1" prop="macmini">
+        <el-input v-model="form.macmini1" autocomplete="off"></el-input>
+      </el-form-item>
+      <el-form-item label="Mac mini #2" prop="macmini">
+        <el-input v-model="form.macmini2" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item label="TC 盒子" prop="tc">
         <el-input v-model="form.tc" autocomplete="off"></el-input>
@@ -46,7 +49,8 @@ export default {
     "monitor1",
     "monitor2",
     "monitor3",
-    "macmini",
+    "macmini1",
+    "macmini2",
     "tc",
     "user",
     "phone"
@@ -59,7 +63,8 @@ export default {
         monitor1: "",
         monitor2: "",
         monitor3: "",
-        macmini: "",
+        macmini1: "",
+        macmini2: "",
         tc: "",
         user: "",
         phone: ""
@@ -89,7 +94,15 @@ export default {
             trigger: "blur"
           }
         ],
-        macmini: [
+        macmini1: [
+          {
+            type: "string",
+            pattern: /^\d{8}$/,
+            message: "设备编号应为8位数字",
+            trigger: "blur"
+          }
+        ],
+        macmini2: [
           {
             type: "string",
             pattern: /^\d{8}$/,
@@ -124,7 +137,8 @@ export default {
         this.form.monitor1 = this.monitor1;
         this.form.monitor2 = this.monitor2;
         this.form.monitor3 = this.monitor3;
-        this.form.macmini = this.macmini;
+        this.form.macmini1 = this.macmini1;
+        this.form.macmini2 = this.macmini2;
         this.form.tc = this.tc;
         this.form.user = this.user;
         this.form.phone = this.phone;

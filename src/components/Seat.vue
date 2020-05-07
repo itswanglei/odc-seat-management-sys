@@ -5,7 +5,8 @@
       <p>显示器 #1：{{seat.monitor1}}</p>
       <p>显示器 #2：{{seat.monitor2}}</p>
       <p>显示器 #3：{{seat.monitor3}}</p>
-      <p>Mac mini：{{seat.macmini}}</p>
+      <p>Mac mini #1：{{seat.macmini1}}</p>
+      <p>Mac mini #2：{{seat.macmini2}}</p>
       <p>TC 盒子：{{seat.tc}}</p>
       <p>使用人：{{seat.user}}</p>
       <p>联系方式：{{seat.phone}}</p>
@@ -44,7 +45,8 @@ export default {
           monitor1: "",
           monitor2: "",
           monitor3: "",
-          macmini: "",
+          macmini1: "",
+          macmini2: "",
           tc: "",
           user: "",
           phone: ""

@@ -60,7 +60,8 @@ export default {
         monitor1: "",
         monitor2: "",
         monitor3: "",
-        macmini: "",
+        macmini1: "",
+        macmini2: "",
         tc: "",
         user: "",
         phone: ""

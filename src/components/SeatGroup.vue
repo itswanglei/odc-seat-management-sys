@@ -38,7 +38,8 @@ export default {
           monitor1: "",
           monitor2: "",
           monitor3: "",
-          macmini: "",
+          macmini1: "",
+          macmini2: "",
           tc: "",
           user: "",
           phone: ""
@@ -55,7 +56,9 @@ export default {
   },
   computed: {
     tableId() {
-      return this.seats[0].seatId.slice(0, 1);
+      const id = this.seats[0].seatId.slice(0, 1);
+      const isValidId = /^[A-Za-z]{1}$/.test(id);
+      return isValidId ? id : "";
     },
     leftGroup() {
       return this.seats.slice(0, 5);
