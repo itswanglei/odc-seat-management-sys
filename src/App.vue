@@ -33,7 +33,7 @@ export default {
   data() {
     return {
       keywords: "",
-      statistics: getStatistics(),
+      statistics: getStatistics(this.$route.name),
       seatsData: getRegionData(this.$route.name)
     };
   },

@@ -34,7 +34,7 @@ const groupSeatsByTable = function(seats) {
   return seatGroups;
 };
 
-export const getStatistics = function() {
+export const getStatistics = function(region) {
   const result = {
     total: 0,
     availiable: 0,
@@ -45,7 +45,7 @@ export const getStatistics = function() {
     return result;
   }
 
-  const regionData = allSeatsData["greenRegion"];
+  const regionData = allSeatsData[region];
 
   if (!regionData || regionData.length === 0) {
     return result;
