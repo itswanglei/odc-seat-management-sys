@@ -8,8 +8,8 @@ Vue.use(VueRouter);
 
 export default new VueRouter({
   routes: [
-    { path: "/green-region", component: GreenRegion },
-    { path: "/blue-region", component: BlueRegion },
+    { path: "/green-region", name: "greenRegion", component: GreenRegion },
+    { path: "/blue-region", name: "blueRegion", component: BlueRegion },
     { path: "/", redirect: "/green-region" },
   ],
 });

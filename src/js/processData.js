@@ -1,30 +1,28 @@
 import allSeatsData from "../assets/data.json";
 
-export const getGreenRegionData = function() {
-  const formatedData = {
-    subRegion1: [],
-    subRegion2: [],
-    subRegion3: [],
-  };
-
+export const getRegionData = function(region) {
   if (!allSeatsData || Object.keys(allSeatsData).length === 0) {
-    return formatedData;
+    return {};
   }
 
-  const originalData = allSeatsData["greenRegion"];
+  const originalData = allSeatsData[region];
 
   if (!originalData || originalData.length === 0) {
-    return formatedData;
+    return {};
   }
 
-  formatedData.subRegion1 = groupSeatsByTable(originalData.slice(0, 90));
-  formatedData.subRegion2 = groupSeatsByTable(originalData.slice(90, 190));
-  formatedData.subRegion3 = groupSeatsByTable(originalData.slice(190));
-
-  return formatedData;
+  return region === "greenRegion" && getGreenRegionData(originalData);
 };
 
-function groupSeatsByTable(seats) {
+const getGreenRegionData = function(originalData) {
+  return {
+    subRegion1: groupSeatsByTable(originalData.slice(0, 90)),
+    subRegion2: groupSeatsByTable(originalData.slice(90, 190)),
+    subRegion3: groupSeatsByTable(originalData.slice(190)),
+  };
+};
+
+const groupSeatsByTable = function(seats) {
   const seatGroups = [];
   const unit = 10;
   const groupNumber = Math.ceil(seats.length / unit);
@@ -34,7 +32,7 @@ function groupSeatsByTable(seats) {
       : seatGroups.push(seats.slice(i * unit, (i + 1) * unit));
   }
   return seatGroups;
-}
+};
 
 export const getStatistics = function() {
   const result = {

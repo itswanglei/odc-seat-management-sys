@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { getGreenRegionData, getStatistics } from "./js/processData";
+import { getRegionData, getStatistics } from "./js/processData";
 
 export default {
   name: "App",
@@ -34,7 +34,7 @@ export default {
     return {
       keywords: "",
       statistics: getStatistics(),
-      seatsData: getGreenRegionData()
+      seatsData: getRegionData(this.$route.name)
     };
   },
   methods: {
