@@ -7,7 +7,11 @@ export const getRegionData = function(region) {
 
   const originalData = allSeatsData[region];
 
-  if (!originalData || originalData.length === 0) {
+  if (
+    !originalData ||
+    !Array.isArray(originalData) ||
+    originalData.length === 0
+  ) {
     return {};
   }
 
@@ -15,11 +19,29 @@ export const getRegionData = function(region) {
 };
 
 const getGreenRegionData = function(originalData) {
+  const completeData = originalData.concat(
+    generateEmptyRegion(250 - originalData.length)
+  );
+
   return {
-    subRegion1: groupSeatsByTable(originalData.slice(0, 90)),
-    subRegion2: groupSeatsByTable(originalData.slice(90, 190)),
-    subRegion3: groupSeatsByTable(originalData.slice(190)),
+    subRegion1: groupSeatsByTable(completeData.slice(0, 90)),
+    subRegion2: groupSeatsByTable(completeData.slice(90, 190)),
+    subRegion3: groupSeatsByTable(completeData.slice(190)),
   };
+};
+
+const generateEmptyRegion = function(seatNumber) {
+  return Array.apply(null, { length: seatNumber }).map((item, index) => ({
+    seatId: String(index),
+    monitor1: "",
+    monitor2: "",
+    monitor3: "",
+    macmini1: "",
+    macmini2: "",
+    tc: "",
+    user: "",
+    phone: "",
+  }));
 };
 
 const groupSeatsByTable = function(seats) {
