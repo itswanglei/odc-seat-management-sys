@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { Message } from "element-ui";
+import { Notification } from "element-ui";
 import SeatGroup from "./SeatGroup";
 import SeatInfoForm from "./SeatInfoForm";
 
@@ -58,7 +58,9 @@ export default {
       this.$refs["dialog"].handleOpen(seatInfo);
     },
     saveSeatInfo(seatInfo) {
-      Message.success("保存成功");
+      Notification.success({
+        title: "保存成功"
+      });
       this.$store.dispatch("updateSeatsData", {
         region: "greenRegion",
         seat: seatInfo
