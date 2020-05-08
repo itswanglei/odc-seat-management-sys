@@ -121,7 +121,7 @@ export default {
         phone: [
           {
             type: "string",
-            pattern: /^\d{8}$/,
+            pattern: /^\d{11}$/,
             message: "联系电话应为11位数字",
             trigger: "blur"
           }
