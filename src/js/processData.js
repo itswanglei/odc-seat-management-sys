@@ -1,6 +1,26 @@
-import allSeatsData from "../assets/data.json";
+import initalSeatsData from "../assets/data.json";
 
-export const getRegionData = function(region) {
+export const initalizeData = function() {
+  let allSeatsData = JSON.parse(
+    localStorage.getItem("odc-seats-management-sys")
+  );
+
+  if (!allSeatsData) {
+    allSeatsData =
+      !initalSeatsData || Object.keys(initalSeatsData).length === 0
+        ? {}
+        : initalSeatsData;
+
+    localStorage.setItem(
+      "odc-seats-management-sys",
+      JSON.stringify(allSeatsData)
+    );
+  }
+
+  return allSeatsData;
+};
+
+export const getRegionData = function(allSeatsData, region) {
   if (!allSeatsData || Object.keys(allSeatsData).length === 0) {
     return {};
   }
@@ -60,7 +80,7 @@ const groupSeatsByTable = function(seats) {
   return seatGroups;
 };
 
-export const getStatistics = function(region) {
+export const getStatistics = function(allSeatsData, region) {
   const result = {
     total: 0,
     availiable: 0,
@@ -84,7 +104,7 @@ export const getStatistics = function(region) {
   return result;
 };
 
-export const getSeatsIdByKeywords = function(keywords, region) {
+export const getSeatsIdByKeywords = function(keywords, allSeatsData, region) {
   if (!allSeatsData || Object.keys(allSeatsData).length === 0) {
     return [];
   }
@@ -98,4 +118,28 @@ export const getSeatsIdByKeywords = function(keywords, region) {
   return regionData
     .filter((item) => Object.values(item).includes(keywords))
     .map((item) => item.seatId);
+};
+
+export const updateData = function(allSeatsData, region, seat) {
+  if (!allSeatsData || Object.keys(allSeatsData).length === 0) {
+    return {};
+  }
+
+  const regionData = allSeatsData[region];
+
+  if (!regionData || regionData.length === 0) {
+    return {};
+  }
+
+  const index = regionData.findIndex((item) => item.seatId === seat.seatId);
+
+  if (index === -1) {
+    return {};
+  }
+
+  regionData.splice(index, 1, seat);
+
+  allSeatsData[region] = regionData;
+
+  return allSeatsData;
 };

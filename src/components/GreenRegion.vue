@@ -72,11 +72,13 @@ export default {
     openEditDialog(seatInfo) {
       this.currentSeatInfo = seatInfo;
       this.$refs["dialog"].handleOpen();
-      console.log(this.currentSeatInfo);
     },
     saveSeatInfo(seatInfo) {
       Message.success("保存成功");
-      console.log(seatInfo);
+      this.$store.dispatch("updateSeatsData", {
+        region: "greenRegion",
+        seat: seatInfo
+      });
     }
   }
 };

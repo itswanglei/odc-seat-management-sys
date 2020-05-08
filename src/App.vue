@@ -26,16 +26,24 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import { getRegionData, getStatistics } from "./js/processData";
 
 export default {
   name: "App",
   data() {
     return {
-      keywords: "",
-      statistics: getStatistics(this.$route.name),
-      seatsData: getRegionData(this.$route.name)
+      keywords: ""
     };
+  },
+  computed: {
+    ...mapState(["allSeatsData"]),
+    statistics() {
+      return getStatistics(this.allSeatsData, this.$route.name);
+    },
+    seatsData() {
+      return getRegionData(this.allSeatsData, this.$route.name);
+    }
   },
   methods: {
     search() {
