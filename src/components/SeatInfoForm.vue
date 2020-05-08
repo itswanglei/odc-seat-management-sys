@@ -2,11 +2,11 @@
   <el-dialog
     :visible.sync="visible"
     title="编辑座位信息"
-    width="25%"
+    width="26%"
     :before-close="resetFields"
     @open="handleOpen"
   >
-    <el-form :model="form" :rules="rules" ref="form" label-position="left" label-width="80px">
+    <el-form :model="form" :rules="rules" ref="form" label-position="left" label-width="95px">
       <el-form-item label="座位编号">
         <el-input v-model="form.seatId" autocomplete="off" disabled></el-input>
       </el-form-item>
