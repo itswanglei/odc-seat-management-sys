@@ -27,7 +27,7 @@
         ></seat-group>
       </div>
     </div>
-    <seat-info-form ref="dialog" v-bind="currentSeatInfo" @submit="saveSeatInfo"></seat-info-form>
+    <seat-info-form ref="dialog" @submit="saveSeatInfo"></seat-info-form>
   </div>
 </template>
 
@@ -53,25 +53,9 @@ export default {
       }
     }
   },
-  data() {
-    return {
-      currentSeatInfo: {
-        seatId: "",
-        monitor1: "",
-        monitor2: "",
-        monitor3: "",
-        macmini1: "",
-        macmini2: "",
-        tc: "",
-        user: "",
-        phone: ""
-      }
-    };
-  },
   methods: {
     openEditDialog(seatInfo) {
-      this.currentSeatInfo = seatInfo;
-      this.$refs["dialog"].handleOpen();
+      this.$refs["dialog"].handleOpen(seatInfo);
     },
     saveSeatInfo(seatInfo) {
       Message.success("保存成功");

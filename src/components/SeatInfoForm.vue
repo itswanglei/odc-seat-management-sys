@@ -1,11 +1,5 @@
 <template>
-  <el-dialog
-    :visible.sync="visible"
-    title="编辑座位信息"
-    width="26%"
-    :before-close="resetFields"
-    @open="handleOpen"
-  >
+  <el-dialog :visible.sync="visible" title="编辑座位信息" width="26%" :before-close="resetFields">
     <el-form :model="form" :rules="rules" ref="form" label-position="left" label-width="95px">
       <el-form-item label="座位编号">
         <el-input v-model="form.seatId" autocomplete="off" disabled></el-input>
@@ -44,17 +38,6 @@
 
 <script>
 export default {
-  props: [
-    "seatId",
-    "monitor1",
-    "monitor2",
-    "monitor3",
-    "macmini1",
-    "macmini2",
-    "tc",
-    "user",
-    "phone"
-  ],
   data() {
     return {
       visible: false,
@@ -130,19 +113,9 @@ export default {
     };
   },
   methods: {
-    handleOpen() {
+    handleOpen(seatInfo) {
       this.visible = true;
-      this.$nextTick(() => {
-        this.form.seatId = this.seatId;
-        this.form.monitor1 = this.monitor1;
-        this.form.monitor2 = this.monitor2;
-        this.form.monitor3 = this.monitor3;
-        this.form.macmini1 = this.macmini1;
-        this.form.macmini2 = this.macmini2;
-        this.form.tc = this.tc;
-        this.form.user = this.user;
-        this.form.phone = this.phone;
-      });
+      this.form = seatInfo;
     },
     handleClose(formName) {
       this.$refs[formName].resetFields();
