@@ -5,6 +5,7 @@ import {
   Input,
   Form,
   FormItem,
+  ButtonGroup,
   Button,
   Dialog,
   Divider,
@@ -16,6 +17,7 @@ Vue.use(MenuItem);
 Vue.use(Input);
 Vue.use(Form);
 Vue.use(FormItem);
+Vue.use(ButtonGroup);
 Vue.use(Button);
 Vue.use(Dialog);
 Vue.use(Divider);

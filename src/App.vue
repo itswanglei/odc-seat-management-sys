@@ -5,6 +5,7 @@
       <el-menu-item index="blue-region" disabled>ODC 蓝区</el-menu-item>
       <el-menu-item>
         <el-input
+          size="medium"
           placeholder="搜索座位编号、设备编号、使用人"
           prefix-icon="el-icon-search"
           v-model="keywords"
@@ -19,6 +20,19 @@
           <el-divider direction="vertical"></el-divider>
           <span>已占用 {{statistics.occupied}}</span>
         </div>
+      </el-menu-item>
+      <el-menu-item>
+        <input
+          type="file"
+          ref="fileElem"
+          accept="application/json"
+          style="display:none"
+          @change="handleFiles"
+        />
+        <el-button-group>
+          <el-button plain size="medium" @click="upload">导入</el-button>
+          <el-button plain size="medium" @click="download">导出</el-button>
+        </el-button-group>
       </el-menu-item>
     </el-menu>
     <router-view :seats-data="seatsData"></router-view>
@@ -53,6 +67,22 @@ export default {
             region: this.$route.name
           })
         : this.$store.dispatch("resetSeatsState");
+    },
+    upload() {
+      const fileElem = this.$refs["fileElem"];
+      if (fileElem) {
+        fileElem.click();
+      }
+    },
+    download() {},
+    handleFiles(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = event => {
+        const data = JSON.parse(event.target.result);
+        this.$store.dispatch("reloadSeatsData", data);
+      };
+      reader.readAsText(file);
     }
   }
 };

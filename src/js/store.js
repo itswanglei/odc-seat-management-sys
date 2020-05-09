@@ -26,6 +26,9 @@ export default new Vuex.Store({
     updateSeatsData(state, { region, seat }) {
       state.allSeatsData = updateData(state.allSeatsData, region, seat);
     },
+    reloadSeatsData(state, seatsData) {
+      state.allSeatsData = seatsData;
+    },
   },
   actions: {
     searchSeats({ commit }, payload) {
@@ -37,13 +40,16 @@ export default new Vuex.Store({
     updateSeatsData({ commit }, payload) {
       commit("updateSeatsData", payload);
     },
+    reloadSeatsData({ commit }, seatsData) {
+      commit("reloadSeatsData", seatsData);
+    },
   },
   plugins: [localStoragePlugin],
 });
 
 function localStoragePlugin(store) {
   store.subscribe((mutation, state) => {
-    if (mutation.type === "updateSeatsData") {
+    if (["updateSeatsData", "reloadSeatsData"].includes(mutation.type)) {
       localStorage.setItem(
         "odc-seats-management-sys",
         JSON.stringify(state.allSeatsData)
