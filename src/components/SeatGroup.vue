@@ -1,6 +1,6 @@
 <template>
-  <div :class="this.orientation + '-wrapper'">
-    <div :class="orientation">
+  <div :class="orientation + '-wrapper'">
+    <div :class="[orientation, seatsOrder.leftGroup]">
       <seat
         v-for="seat in leftGroup"
         :key="seat.seatId"
@@ -9,8 +9,8 @@
         @edit-seat-info="$emit('edit-seat-info', seat)"
       ></seat>
     </div>
-    <div class="table" :class="this.orientation + '-table'">{{tableId}}</div>
-    <div :class="orientation">
+    <div class="table" :class="orientation + '-table'">{{tableId}}</div>
+    <div :class="[orientation, seatsOrder.rightGroup]">
       <seat
         v-for="seat in rightGroup"
         :key="seat.seatId"
@@ -50,7 +50,14 @@ export default {
       type: String,
       default: "vertical",
       validator(value) {
-        return ["horizontal", "vertical"].indexOf(value) !== -1;
+        return ["horizontal", "vertical"].includes(value);
+      }
+    },
+    order: {
+      type: String,
+      default: "clockwise",
+      validator(value) {
+        return ["clockwise", "counterclockwise"].includes(value);
       }
     }
   },
@@ -76,6 +83,29 @@ export default {
             leftGroup: "right",
             rightGroup: "left"
           };
+    },
+    seatsOrder() {
+      if (this.orientation === "vertical") {
+        return this.order === "clockwise"
+          ? {
+              leftGroup: "bottom-to-top",
+              rightGroup: "top-to-bottom"
+            }
+          : {
+              leftGroup: "top-to-bottom",
+              rightGroup: "bottom-to-top"
+            };
+      } else {
+        return this.order === "clockwise"
+          ? {
+              leftGroup: "right-to-left",
+              rightGroup: "left-to-right"
+            }
+          : {
+              leftGroup: "left-to-right",
+              rightGroup: "right-to-left"
+            };
+      }
     }
   }
 };
@@ -91,8 +121,25 @@ export default {
   flex-direction: column-reverse;
 }
 
+.vertical,
 .horizontal {
   display: flex;
+}
+
+.top-to-bottom {
+  flex-direction: column;
+}
+
+.bottom-to-top {
+  flex-direction: column-reverse;
+}
+
+.left-to-right {
+  flex-direction: row;
+}
+
+.right-to-left {
+  flex-direction: row-reverse;
 }
 
 .table {

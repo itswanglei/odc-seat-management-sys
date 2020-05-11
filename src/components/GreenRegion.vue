@@ -8,6 +8,7 @@
           :seats="seats"
           @edit-seat-info="openEditDialog"
           orientation="horizontal"
+          order="counterclockwise"
         ></seat-group>
       </div>
       <div class="vertical-region">
@@ -16,6 +17,7 @@
           :key="index"
           :seats="seats"
           @edit-seat-info="openEditDialog"
+          order="counterclockwise"
         ></seat-group>
       </div>
       <div class="vertical-region">
