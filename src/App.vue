@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <el-menu default-active="green-region" mode="horizontal" router>
+    <el-menu class="menu" default-active="green-region" mode="horizontal" router>
       <el-menu-item index="green-region">ODC 绿区</el-menu-item>
       <el-menu-item index="blue-region" disabled>ODC 蓝区</el-menu-item>
       <el-menu-item>
@@ -21,7 +21,7 @@
           <span>已占用 {{statistics.occupied}}</span>
         </div>
       </el-menu-item>
-      <el-menu-item>
+      <el-menu-item class="button-group">
         <input
           type="file"
           ref="fileElem"
@@ -112,7 +112,16 @@ export default {
   margin-top: 10px;
 }
 
+.el-menu {
+  position: relative;
+}
+
 .el-input {
   width: 280px;
+}
+
+.button-group {
+  position: absolute;
+  right: 0px;
 }
 </style>
