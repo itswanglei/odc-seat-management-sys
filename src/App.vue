@@ -36,8 +36,8 @@
           download="odc-seats-data.json"
         ></a>
         <el-button-group>
-          <el-button plain size="medium" @click="upload">导入</el-button>
-          <el-button plain size="medium" @click="download">导出</el-button>
+          <el-button plain size="medium" @click="upload">导 入</el-button>
+          <el-button plain size="medium" @click="download">导 出</el-button>
         </el-button-group>
       </el-menu-item>
     </el-menu>
