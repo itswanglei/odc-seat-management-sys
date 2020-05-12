@@ -29,6 +29,12 @@
           style="display:none"
           @change="handleFiles"
         />
+        <a
+          :href="downloadUrl"
+          ref="downloadElem"
+          style="display:none"
+          download="odc-seats-data.json"
+        ></a>
         <el-button-group>
           <el-button plain size="medium" @click="upload">导入</el-button>
           <el-button plain size="medium" @click="download">导出</el-button>
@@ -47,7 +53,8 @@ export default {
   name: "App",
   data() {
     return {
-      keywords: ""
+      keywords: "",
+      downloadUrl: ""
     };
   },
   computed: {
@@ -74,7 +81,15 @@ export default {
         fileElem.click();
       }
     },
-    download() {},
+    download() {
+      const data = localStorage.getItem("odc-seats-management-sys");
+      const blob = new Blob([data], { type: "application/json" });
+      this.downloadUrl = URL.createObjectURL(blob);
+      const downloadElem = this.$refs["downloadElem"];
+      if (downloadElem) {
+        downloadElem.click();
+      }
+    },
     handleFiles(event) {
       const file = event.target.files[0];
       const reader = new FileReader();
