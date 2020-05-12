@@ -18,6 +18,7 @@
           :seats="seats"
           @edit-seat-info="openEditDialog"
           order="counterclockwise"
+          firstSeatPosition="northwest"
         ></seat-group>
       </div>
       <div class="vertical-region">

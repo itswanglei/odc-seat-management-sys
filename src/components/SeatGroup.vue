@@ -1,20 +1,20 @@
 <template>
-  <div :class="orientation + '-wrapper'">
-    <div :class="[orientation, seatsOrder.leftGroup]">
+  <div :class="orientation">
+    <div class="sub-group" :class="seatsOrder.groupA">
       <seat
-        v-for="seat in leftGroup"
+        v-for="seat in groupA"
         :key="seat.seatId"
-        :orientation="seatOrientation.leftGroup"
+        :orientation="seatOrientation.groupA"
         :seat="seat"
         @edit-seat-info="$emit('edit-seat-info', seat)"
       ></seat>
     </div>
     <div class="table" :class="orientation + '-table'">{{tableId}}</div>
-    <div :class="[orientation, seatsOrder.rightGroup]">
+    <div class="sub-group" :class="seatsOrder.groupB">
       <seat
-        v-for="seat in rightGroup"
+        v-for="seat in groupB"
         :key="seat.seatId"
-        :orientation="seatOrientation.rightGroup"
+        :orientation="seatOrientation.groupB"
         :seat="seat"
         @edit-seat-info="$emit('edit-seat-info', seat)"
       ></seat>
@@ -24,6 +24,7 @@
 
 <script>
 import Seat from "./Seat";
+import { Seats_Orientation_Map, Seats_Order_Map } from "../js/constants";
 
 export default {
   components: {
@@ -59,6 +60,15 @@ export default {
       validator(value) {
         return ["clockwise", "counterclockwise"].includes(value);
       }
+    },
+    firstSeatPosition: {
+      type: String,
+      default: "southwest",
+      validator(value) {
+        return ["southwest", "southeast", "northeast", "northwest"].includes(
+          value
+        );
+      }
     }
   },
   computed: {
@@ -67,62 +77,37 @@ export default {
       const isValidId = /^[A-Za-z]{1}$/.test(id);
       return isValidId ? id : "";
     },
-    leftGroup() {
+    groupA() {
       return this.seats.slice(0, 5);
     },
-    rightGroup() {
+    groupB() {
       return this.seats.slice(5);
     },
     seatOrientation() {
-      return this.orientation === "horizontal"
-        ? {
-            leftGroup: "top",
-            rightGroup: "bottom"
-          }
-        : {
-            leftGroup: "right",
-            rightGroup: "left"
-          };
+      return Seats_Orientation_Map[this.orientation][this.order][
+        this.firstSeatPosition
+      ];
     },
     seatsOrder() {
-      if (this.orientation === "vertical") {
-        return this.order === "clockwise"
-          ? {
-              leftGroup: "bottom-to-top",
-              rightGroup: "top-to-bottom"
-            }
-          : {
-              leftGroup: "top-to-bottom",
-              rightGroup: "bottom-to-top"
-            };
-      } else {
-        return this.order === "clockwise"
-          ? {
-              leftGroup: "right-to-left",
-              rightGroup: "left-to-right"
-            }
-          : {
-              leftGroup: "left-to-right",
-              rightGroup: "right-to-left"
-            };
-      }
+      return Seats_Order_Map[this.orientation][this.order][
+        this.firstSeatPosition
+      ];
     }
   }
 };
 </script>
 
 <style scoped>
-.vertical-wrapper {
+.vertical {
   display: flex;
 }
 
-.horizontal-wrapper {
+.horizontal {
   display: flex;
   flex-direction: column-reverse;
 }
 
-.vertical,
-.horizontal {
+.sub-group {
   display: flex;
 }
 
