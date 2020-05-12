@@ -7,7 +7,8 @@
       <p>显示器 #3：{{seat.monitor3}}</p>
       <p>Mac mini #1：{{seat.macmini1}}</p>
       <p>Mac mini #2：{{seat.macmini2}}</p>
-      <p>TC 盒子：{{seat.tc}}</p>
+      <p v-if="region === 'greenRegion'">TC 盒子：{{seat.tc}}</p>
+      <p v-if="region === 'blueRegion'">PC：{{seat.pc}}</p>
       <p>使用人：{{seat.user}}</p>
       <p>联系方式：{{seat.phone}}</p>
     </div>
@@ -48,6 +49,7 @@ export default {
           macmini1: "",
           macmini2: "",
           tc: "",
+          pc: "",
           user: "",
           phone: ""
         };
@@ -68,6 +70,9 @@ export default {
         : this.isAvailable
         ? availableSeatImg
         : occupiedSeatImg;
+    },
+    region() {
+      return this.$route.name;
     }
   }
 };

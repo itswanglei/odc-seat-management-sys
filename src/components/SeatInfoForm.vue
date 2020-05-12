@@ -19,8 +19,11 @@
       <el-form-item label="Mac mini #2" prop="macmini">
         <el-input v-model="form.macmini2" autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item label="TC 盒子" prop="tc">
+      <el-form-item v-if="region === 'greenRegion'" label="TC 盒子" prop="tc">
         <el-input v-model="form.tc" autocomplete="off"></el-input>
+      </el-form-item>
+      <el-form-item v-if="region === 'blueRegion'" label="PC" prop="pc">
+        <el-input v-model="form.pc" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item label="使用人">
         <el-input v-model="form.user" autocomplete="off"></el-input>
@@ -101,6 +104,14 @@ export default {
             trigger: "blur"
           }
         ],
+        pc: [
+          {
+            type: "string",
+            pattern: /^\d{8}$/,
+            message: "设备编号应为8位数字",
+            trigger: "blur"
+          }
+        ],
         phone: [
           {
             type: "string",
@@ -111,6 +122,11 @@ export default {
         ]
       }
     };
+  },
+  computed: {
+    region() {
+      return this.$route.name;
+    }
   },
   methods: {
     handleOpen(seatInfo) {

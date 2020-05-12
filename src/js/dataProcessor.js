@@ -63,6 +63,7 @@ const generateEmptyRegion = function(seatNumber) {
     macmini1: "",
     macmini2: "",
     tc: "",
+    pc: "",
     user: "",
     phone: "",
   }));
