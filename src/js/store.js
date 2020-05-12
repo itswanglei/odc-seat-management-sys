@@ -1,7 +1,11 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
-import { initalizeData, getSeatsIdByKeywords, updateData } from "./processData";
+import {
+  initalizeData,
+  getSeatsIdByKeywords,
+  updateData,
+} from "./dataProcessor";
 
 Vue.use(Vuex);
 

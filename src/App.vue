@@ -47,7 +47,7 @@
 
 <script>
 import { mapState } from "vuex";
-import { getRegionData, getStatistics } from "./js/processData";
+import { getRegionData, getStatistics } from "./js/dataProcessor";
 
 export default {
   name: "App",
