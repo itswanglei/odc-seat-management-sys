@@ -144,3 +144,21 @@ export const updateData = function(allSeatsData, region, seat) {
 
   return allSeatsData;
 };
+
+export const validateImportedDataFormat = function(data) {
+  if (data instanceof Object && Object.keys(data).length > 0) {
+    data["greenRegion"] && removeInvalidData(data, "greenRegion");
+    data["blueRegion"] && removeInvalidData(data, "blueRegion");
+    return data;
+  }
+  return false;
+};
+
+const removeInvalidData = function(data, region) {
+  if (
+    data[region].length > 0 &&
+    !data[region].reduce((acc, cur) => acc && cur instanceof Object)
+  ) {
+    delete data[region];
+  }
+};

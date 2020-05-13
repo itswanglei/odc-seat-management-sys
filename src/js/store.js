@@ -5,6 +5,7 @@ import {
   initalizeData,
   getSeatsIdByKeywords,
   updateData,
+  validateImportedDataFormat,
 } from "./dataProcessor";
 
 Vue.use(Vuex);
@@ -30,8 +31,10 @@ export default new Vuex.Store({
     updateSeatsData(state, { region, seat }) {
       state.allSeatsData = updateData(state.allSeatsData, region, seat);
     },
-    reloadSeatsData(state, seatsData) {
-      state.allSeatsData = seatsData;
+    importSeatsData(state, seatsData) {
+      if (validateImportedDataFormat(seatsData)) {
+        state.allSeatsData = Object.assign({}, seatsData);
+      }
     },
   },
   actions: {
@@ -44,8 +47,8 @@ export default new Vuex.Store({
     updateSeatsData({ commit }, payload) {
       commit("updateSeatsData", payload);
     },
-    reloadSeatsData({ commit }, seatsData) {
-      commit("reloadSeatsData", seatsData);
+    importSeatsData({ commit }, seatsData) {
+      commit("importSeatsData", seatsData);
     },
   },
   plugins: [localStoragePlugin],

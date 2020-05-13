@@ -46,6 +46,8 @@
 </template>
 
 <script>
+import { Notification } from "element-ui";
+
 import { mapState } from "vuex";
 import { getRegionData, getStatistics } from "./js/dataProcessor";
 
@@ -77,9 +79,7 @@ export default {
     },
     upload() {
       const fileElem = this.$refs["fileElem"];
-      if (fileElem) {
-        fileElem.click();
-      }
+      fileElem && fileElem.click();
     },
     download() {
       const data = localStorage.getItem("odc-seats-management-sys");
@@ -93,7 +93,10 @@ export default {
       const reader = new FileReader();
       reader.onload = event => {
         const data = JSON.parse(event.target.result);
-        this.$store.dispatch("reloadSeatsData", data);
+        this.$store.dispatch("importSeatsData", data);
+        Notification.success({
+          title: "导入成功"
+        });
       };
       reader.readAsText(file);
     }
