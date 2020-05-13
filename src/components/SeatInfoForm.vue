@@ -131,7 +131,7 @@ export default {
   methods: {
     handleOpen(seatInfo) {
       this.visible = true;
-      this.form = seatInfo;
+      this.form = Object.assign({}, seatInfo);
     },
     handleClose(formName) {
       this.$refs[formName].resetFields();
