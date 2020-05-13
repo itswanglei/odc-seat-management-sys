@@ -13,10 +13,10 @@
       <el-form-item label="显示器 #3" prop="monitor3">
         <el-input v-model="form.monitor3" autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item label="Mac mini #1" prop="macmini">
+      <el-form-item label="Mac mini #1" prop="macmini1">
         <el-input v-model="form.macmini1" autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item label="Mac mini #2" prop="macmini">
+      <el-form-item label="Mac mini #2" prop="macmini2">
         <el-input v-model="form.macmini2" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item v-if="region === 'greenRegion'" label="TC 盒子" prop="tc">
