@@ -10,7 +10,7 @@
       <p v-if="region === 'greenRegion'">TC 盒子：{{seat.tc}}</p>
       <p v-if="region === 'blueRegion'">PC：{{seat.pc}}</p>
       <p>使用人：{{seat.user}}</p>
-      <p>联系方式：{{seat.phone}}</p>
+      <p>联系电话：{{seat.phone}}</p>
     </div>
     <div
       slot="reference"
