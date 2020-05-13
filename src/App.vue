@@ -86,9 +86,7 @@ export default {
       const blob = new Blob([data], { type: "application/json" });
       this.downloadUrl = URL.createObjectURL(blob);
       const downloadElem = this.$refs["downloadElem"];
-      if (downloadElem) {
-        downloadElem.click();
-      }
+      downloadElem && setTimeout(() => downloadElem.click(), 1000);
     },
     handleFiles(event) {
       const file = event.target.files[0];
