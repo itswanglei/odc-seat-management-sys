@@ -2,34 +2,34 @@
   <el-dialog :visible.sync="visible" title="编辑座位信息" width="26%" :before-close="resetFields">
     <el-form :model="form" :rules="rules" ref="form" label-position="left" label-width="95px">
       <el-form-item label="座位编号">
-        <el-input v-model="form.seatId" autocomplete="off" disabled></el-input>
+        <el-input v-model="form.seatId" disabled></el-input>
       </el-form-item>
       <el-form-item label="显示器 #1" prop="monitor1">
-        <el-input v-model="form.monitor1" autocomplete="off"></el-input>
+        <el-input v-model="form.monitor1"></el-input>
       </el-form-item>
       <el-form-item label="显示器 #2" prop="monitor2">
-        <el-input v-model="form.monitor2" autocomplete="off"></el-input>
+        <el-input v-model="form.monitor2"></el-input>
       </el-form-item>
       <el-form-item label="显示器 #3" prop="monitor3">
-        <el-input v-model="form.monitor3" autocomplete="off"></el-input>
+        <el-input v-model="form.monitor3"></el-input>
       </el-form-item>
       <el-form-item label="Mac mini #1" prop="macmini1">
-        <el-input v-model="form.macmini1" autocomplete="off"></el-input>
+        <el-input v-model="form.macmini1"></el-input>
       </el-form-item>
       <el-form-item label="Mac mini #2" prop="macmini2">
-        <el-input v-model="form.macmini2" autocomplete="off"></el-input>
+        <el-input v-model="form.macmini2"></el-input>
       </el-form-item>
       <el-form-item v-if="region === 'greenRegion'" label="TC 盒子" prop="tc">
-        <el-input v-model="form.tc" autocomplete="off"></el-input>
+        <el-input v-model="form.tc"></el-input>
       </el-form-item>
       <el-form-item v-if="region === 'blueRegion'" label="PC" prop="pc">
-        <el-input v-model="form.pc" autocomplete="off"></el-input>
+        <el-input v-model="form.pc"></el-input>
       </el-form-item>
       <el-form-item label="使用人">
-        <el-input v-model="form.user" autocomplete="off"></el-input>
+        <el-input v-model="form.user"></el-input>
       </el-form-item>
       <el-form-item label="联系电话" prop="phone">
-        <el-input v-model="form.phone" autocomplete="off"></el-input>
+        <el-input v-model="form.phone"></el-input>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -40,6 +40,8 @@
 </template>
 
 <script>
+import { Notification } from "element-ui";
+
 export default {
   data() {
     return {
@@ -52,6 +54,7 @@ export default {
         macmini1: "",
         macmini2: "",
         tc: "",
+        pc: "",
         user: "",
         phone: ""
       },
@@ -140,9 +143,14 @@ export default {
     handleSubmit(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.$emit("submit", this.form);
-          this.$refs[formName].resetFields();
-          this.visible = false;
+          this.$store.dispatch("updateSeatsData", {
+            region: this.region,
+            seat: Object.assign({}, this.form)
+          });
+          Notification.success({
+            title: "保存成功"
+          });
+          this.handleClose(formName);
         }
       });
     },

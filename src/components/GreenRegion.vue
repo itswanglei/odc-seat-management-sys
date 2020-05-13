@@ -30,12 +30,11 @@
         ></seat-group>
       </div>
     </div>
-    <seat-info-form ref="dialog" @submit="saveSeatInfo"></seat-info-form>
+    <seat-info-form ref="dialog"></seat-info-form>
   </div>
 </template>
 
 <script>
-import { Notification } from "element-ui";
 import SeatGroup from "./SeatGroup";
 import SeatInfoForm from "./SeatInfoForm";
 
@@ -59,15 +58,6 @@ export default {
   methods: {
     openEditDialog(seatInfo) {
       this.$refs["dialog"].handleOpen(seatInfo);
-    },
-    saveSeatInfo(seatInfo) {
-      Notification.success({
-        title: "保存成功"
-      });
-      this.$store.dispatch("updateSeatsData", {
-        region: "greenRegion",
-        seat: seatInfo
-      });
     }
   }
 };
