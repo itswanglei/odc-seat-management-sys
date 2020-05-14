@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <el-menu class="menu" default-active="green-region" mode="horizontal" router>
+    <el-menu class="menu" :default-active="activeIndex" mode="horizontal" router>
       <el-menu-item index="green-region">ODC 绿区</el-menu-item>
       <el-menu-item index="blue-region">ODC 蓝区</el-menu-item>
       <el-menu-item>
@@ -55,6 +55,7 @@ export default {
   name: "App",
   data() {
     return {
+      activeIndex: this.$route.path.slice(1),
       keywords: "",
       downloadUrl: ""
     };
