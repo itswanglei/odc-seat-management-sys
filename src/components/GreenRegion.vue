@@ -77,24 +77,11 @@ export default {
 }
 
 .horizontal-region {
-  /* width: 20%; */
   margin: 20px 20px 20px 200px;
   display: flex;
   flex-wrap: wrap-reverse;
   justify-content: space-between;
 }
-
-/* @media screen and (max-width: 1840px) {
-  .horizontal-region {
-    width: 20%;
-  }
-}
-
-@media screen and (max-width: 1400px) {
-  .horizontal-region {
-    width: 40%;
-  }
-} */
 
 .vertical-region {
   width: 70%;
