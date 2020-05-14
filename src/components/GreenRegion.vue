@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="odc-region">
+    <div class="green-region">
       <div class="horizontal-region">
         <seat-group
           v-for="(seats, index) in seatsData.subRegion3"
@@ -65,7 +65,7 @@ export default {
 </script>
 
 <style>
-.odc-region {
+.green-region {
   margin: 20px;
   display: flex;
   flex-direction: column;
