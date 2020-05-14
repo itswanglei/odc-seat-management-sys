@@ -1,7 +1,20 @@
 <template>
-  <el-dialog :visible.sync="visible" title="编辑座位信息" width="26%" :before-close="resetFields">
-    <el-form :model="form" :rules="rules" ref="form" label-position="left" label-width="95px">
-      <el-form-item label="座位编号">
+  <el-dialog
+    :visible.sync="visible"
+    title="编辑座位信息"
+    :width="dialogWidth"
+    top="10vh"
+    :before-close="resetFields"
+  >
+    <el-form
+      :model="form"
+      :rules="rules"
+      ref="form"
+      label-position="left"
+      label-width="95px"
+      size="small"
+    >
+      <el-form-item label="座位编号" class="form-item">
         <el-input v-model="form.seatId" disabled></el-input>
       </el-form-item>
       <el-form-item label="显示器 #1" prop="monitor1">
@@ -33,8 +46,8 @@
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
-      <el-button @click="handleClose('form')">取 消</el-button>
-      <el-button type="primary" @click="handleSubmit('form')">保 存</el-button>
+      <el-button size="small" @click="handleClose('form')">取 消</el-button>
+      <el-button type="primary" size="small" @click="handleSubmit('form')">保 存</el-button>
     </div>
   </el-dialog>
 </template>
@@ -129,6 +142,11 @@ export default {
   computed: {
     region() {
       return this.$route.name;
+    },
+    dialogWidth() {
+      // console.log(window.innerWidth);
+      // return window.innerWidth <= 1440 ? "30%" : "26%";
+      return "26%";
     }
   },
   methods: {
@@ -161,3 +179,9 @@ export default {
   }
 };
 </script>
+
+<style >
+form .el-input {
+  width: 230px;
+}
+</style>
