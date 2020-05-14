@@ -144,11 +144,9 @@ export default {
 
 .horizontal-table {
   height: 40px;
-  width: 150px;
 }
 
 .vertical-table {
   width: 40px;
-  height: 150px;
 }
 </style>
