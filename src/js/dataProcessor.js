@@ -1,5 +1,8 @@
 import initalSeatsData from "../assets/data.json";
 
+const Green_Region_Total_Seats = 250;
+const Blue_Region_Total_Seats = 63;
+
 export const initalizeData = function() {
   let allSeatsData = JSON.parse(
     localStorage.getItem("odc-seats-management-sys")
@@ -21,8 +24,10 @@ export const initalizeData = function() {
 };
 
 export const getRegionData = function(allSeatsData, region) {
+  let result = {};
+
   if (!allSeatsData || Object.keys(allSeatsData).length === 0) {
-    return {};
+    result = {};
   }
 
   const originalData = allSeatsData[region];
@@ -32,26 +37,54 @@ export const getRegionData = function(allSeatsData, region) {
     !Array.isArray(originalData) ||
     originalData.length === 0
   ) {
-    return {};
+    result = {};
   }
 
-  return region === "greenRegion" && getGreenRegionData(originalData);
+  if (region === "greenRegion") {
+    result = getGreenRegionData(originalData);
+  }
+
+  if (region === "blueRegion") {
+    result = getBlueRegionData(originalData);
+  }
+
+  return result;
 };
 
 const getGreenRegionData = function(originalData) {
-  const totalSeats = 250;
-  const completeData =
-    originalData.length < totalSeats
-      ? originalData.concat(
-          generateEmptyRegion(totalSeats - originalData.length)
-        )
-      : originalData;
+  const completeData = complementRegionData(
+    Green_Region_Total_Seats,
+    originalData
+  );
 
   return {
     subRegion1: groupSeatsByTable(completeData.slice(0, 90)),
     subRegion2: groupSeatsByTable(completeData.slice(90, 190)),
     subRegion3: groupSeatsByTable(completeData.slice(190)),
   };
+};
+
+const getBlueRegionData = function(originalData) {
+  const completeData = complementRegionData(
+    Blue_Region_Total_Seats,
+    originalData
+  );
+  return {
+    tableA: completeData.slice(0, 12),
+    tableB: completeData.slice(12, 20),
+    tableC: completeData.slice(20, 28),
+    tableD: completeData.slice(28, 38),
+    tableE: completeData.slice(38, 46),
+    tableF: completeData.slice(46, 52),
+    tableG: completeData.slice(52, 57),
+    tableH: completeData.slice(57, 63),
+  };
+};
+
+const complementRegionData = function(totalSeats, originalData) {
+  return originalData.length < totalSeats
+    ? originalData.concat(generateEmptyRegion(totalSeats - originalData.length))
+    : originalData;
 };
 
 const generateEmptyRegion = function(seatNumber) {
