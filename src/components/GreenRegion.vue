@@ -57,7 +57,13 @@ export default {
   },
   computed: {
     regionWidth() {
-      return window.innerWidth > 1440 ? { width: "20%" } : { width: "25%" };
+      if (window.innerWidth > 1600) {
+        return { width: "20%" };
+      } else if (window.innerWidth > 1255) {
+        return { width: "25%" };
+      } else {
+        return { width: "30%" };
+      }
     }
   },
   methods: {
