@@ -78,11 +78,14 @@ export default {
       const isValidId = /^[A-Za-z]{1}$/.test(id);
       return isValidId ? id : "";
     },
+    seatsNumber() {
+      return this.seats.length;
+    },
     groupA() {
-      return this.seats.slice(0, 5);
+      return this.seats.slice(0, Math.ceil(this.seatsNumber / 2));
     },
     groupB() {
-      return this.seats.slice(5);
+      return this.seats.slice(Math.ceil(this.seatsNumber / 2));
     },
     seatOrientation() {
       return Seats_Orientation_Map[this.orientation][this.order][
