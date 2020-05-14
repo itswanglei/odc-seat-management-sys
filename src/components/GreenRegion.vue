@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="odc-region">
-      <div class="horizontal-region">
+      <div class="horizontal-region" :style="regionWidth">
         <seat-group
           v-for="(seats, index) in seatsData.subRegion3"
           :key="index"
@@ -55,6 +55,11 @@ export default {
       }
     }
   },
+  computed: {
+    regionWidth() {
+      return window.innerWidth > 1440 ? { width: "20%" } : { width: "25%" };
+    }
+  },
   methods: {
     openEditDialog(seatInfo) {
       this.$refs["dialog"].handleOpen(seatInfo);
@@ -72,12 +77,24 @@ export default {
 }
 
 .horizontal-region {
-  width: 20%;
+  /* width: 20%; */
   margin: 20px 20px 20px 200px;
   display: flex;
   flex-wrap: wrap-reverse;
   justify-content: space-between;
 }
+
+/* @media screen and (max-width: 1840px) {
+  .horizontal-region {
+    width: 20%;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .horizontal-region {
+    width: 40%;
+  }
+} */
 
 .vertical-region {
   width: 70%;
