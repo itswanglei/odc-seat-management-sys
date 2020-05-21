@@ -2,7 +2,7 @@
   <el-dialog
     :visible.sync="visible"
     title="编辑座位信息"
-    :width="dialogWidth"
+    width="26%"
     top="10vh"
     :before-close="resetFields"
   >
@@ -142,11 +142,6 @@ export default {
   computed: {
     region() {
       return this.$route.name;
-    },
-    dialogWidth() {
-      // console.log(window.innerWidth);
-      // return window.innerWidth <= 1440 ? "30%" : "26%";
-      return "26%";
     }
   },
   methods: {
