@@ -54,6 +54,8 @@
 
 <script>
 import { Notification } from "element-ui";
+import { mapState } from "vuex";
+import { getSeatsInfoByDeviceNumber } from "../js/dataProcessor";
 
 export default {
   data() {
@@ -71,60 +73,54 @@ export default {
         user: "",
         phone: ""
       },
+      originForm: {},
       rules: {
         monitor1: [
           {
             type: "string",
-            pattern: /^\d{8}$/,
-            message: "设备编号应为8位数字",
+            validator: this.validateDeviceNumber,
             trigger: "blur"
           }
         ],
         monitor2: [
           {
             type: "string",
-            pattern: /^\d{8}$/,
-            message: "设备编号应为8位数字",
+            validator: this.validateDeviceNumber,
             trigger: "blur"
           }
         ],
         monitor3: [
           {
             type: "string",
-            pattern: /^\d{8}$/,
-            message: "设备编号应为8位数字",
+            validator: this.validateDeviceNumber,
             trigger: "blur"
           }
         ],
         macmini1: [
           {
             type: "string",
-            pattern: /^\d{8}$/,
-            message: "设备编号应为8位数字",
+            validator: this.validateDeviceNumber,
             trigger: "blur"
           }
         ],
         macmini2: [
           {
             type: "string",
-            pattern: /^\d{8}$/,
-            message: "设备编号应为8位数字",
+            validator: this.validateDeviceNumber,
             trigger: "blur"
           }
         ],
         tc: [
           {
             type: "string",
-            pattern: /^\d{8}$/,
-            message: "设备编号应为8位数字",
+            validator: this.validateDeviceNumber,
             trigger: "blur"
           }
         ],
         pc: [
           {
             type: "string",
-            pattern: /^\d{8}$/,
-            message: "设备编号应为8位数字",
+            validator: this.validateDeviceNumber,
             trigger: "blur"
           }
         ],
@@ -140,6 +136,7 @@ export default {
     };
   },
   computed: {
+    ...mapState(["allSeatsData"]),
     region() {
       return this.$route.name;
     }
@@ -148,6 +145,7 @@ export default {
     handleOpen(seatInfo) {
       this.visible = true;
       this.form = Object.assign({}, seatInfo);
+      this.originForm = Object.assign({}, seatInfo);
     },
     handleClose(formName) {
       this.$refs[formName].resetFields();
@@ -170,6 +168,18 @@ export default {
     resetFields(done) {
       this.$refs["form"].resetFields();
       done();
+    },
+    validateDeviceNumber(rule, value, callback) {
+      const isUpdated = this.originForm[rule.field] !== value;
+      const results = getSeatsInfoByDeviceNumber(value, this.allSeatsData);
+
+      if (!/^\d{8}$/.test(value)) {
+        callback(new Error("设备编号应为8位数字"));
+      } else if (isUpdated && results.length > 0) {
+        callback(new Error(`此编号已登记于${results.join("、")}`));
+      } else {
+        callback();
+      }
     }
   }
 };

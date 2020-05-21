@@ -195,3 +195,28 @@ const removeInvalidData = (data, region) => {
     delete data[region];
   }
 };
+
+export const getSeatsInfoByDeviceNumber = (keywords, allSeatsData) => {
+  const regionNameMap = {
+    greenRegion: "绿区",
+    blueRegion: "蓝区",
+  };
+
+  let seatsInfo = [];
+
+  if (allSeatsData && Object.keys(allSeatsData).length > 0) {
+    const regions = Object.keys(allSeatsData);
+    regions.forEach((region) => {
+      const regionName = regionNameMap[region] || "";
+      const regionData = allSeatsData[region];
+      if (regionData && regionData.length > 0) {
+        const matchedSeats = regionData
+          .filter((item) => Object.values(item).includes(keywords))
+          .map((item) => `${regionName}座位${item.seatId}`);
+        seatsInfo = seatsInfo.concat(...matchedSeats);
+      }
+    });
+  }
+
+  return seatsInfo;
+};
