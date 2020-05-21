@@ -3,7 +3,7 @@ import initalSeatsData from "../assets/data.json";
 const Green_Region_Total_Seats = 250;
 const Blue_Region_Total_Seats = 63;
 
-export const initalizeData = function() {
+export const initalizeData = () => {
   let allSeatsData = JSON.parse(
     localStorage.getItem("odc-seats-management-sys")
   );
@@ -23,7 +23,7 @@ export const initalizeData = function() {
   return allSeatsData;
 };
 
-export const getRegionData = function(allSeatsData, region) {
+export const getRegionData = (allSeatsData, region) => {
   let result = {};
 
   if (!allSeatsData || Object.keys(allSeatsData).length === 0) {
@@ -51,7 +51,7 @@ export const getRegionData = function(allSeatsData, region) {
   return result;
 };
 
-const getGreenRegionData = function(originalData) {
+const getGreenRegionData = (originalData) => {
   const completeData = complementRegionData(
     Green_Region_Total_Seats,
     originalData
@@ -64,7 +64,7 @@ const getGreenRegionData = function(originalData) {
   };
 };
 
-const getBlueRegionData = function(originalData) {
+const getBlueRegionData = (originalData) => {
   const completeData = complementRegionData(
     Blue_Region_Total_Seats,
     originalData
@@ -81,13 +81,13 @@ const getBlueRegionData = function(originalData) {
   };
 };
 
-const complementRegionData = function(totalSeats, originalData) {
+const complementRegionData = (totalSeats, originalData) => {
   return originalData.length < totalSeats
     ? originalData.concat(generateEmptyRegion(totalSeats - originalData.length))
     : originalData;
 };
 
-const generateEmptyRegion = function(seatNumber) {
+const generateEmptyRegion = (seatNumber) => {
   return Array.apply(null, { length: seatNumber }).map((item, index) => ({
     seatId: String(index),
     monitor1: "",
@@ -102,7 +102,7 @@ const generateEmptyRegion = function(seatNumber) {
   }));
 };
 
-const groupSeatsByTable = function(seats) {
+const groupSeatsByTable = (seats) => {
   const seatGroups = [];
   const unit = 10;
   const groupNumber = Math.ceil(seats.length / unit);
@@ -114,7 +114,7 @@ const groupSeatsByTable = function(seats) {
   return seatGroups;
 };
 
-export const getStatistics = function(allSeatsData, region) {
+export const getStatistics = (allSeatsData, region) => {
   const result = {
     total: 0,
     availiable: 0,
@@ -138,7 +138,7 @@ export const getStatistics = function(allSeatsData, region) {
   return result;
 };
 
-export const getSeatsIdByKeywords = function(keywords, allSeatsData, region) {
+export const getSeatsIdByKeywords = (keywords, allSeatsData, region) => {
   if (!allSeatsData || Object.keys(allSeatsData).length === 0) {
     return [];
   }
@@ -154,7 +154,7 @@ export const getSeatsIdByKeywords = function(keywords, allSeatsData, region) {
     .map((item) => item.seatId);
 };
 
-export const updateData = function(allSeatsData, region, seat) {
+export const updateData = (allSeatsData, region, seat) => {
   if (!allSeatsData || Object.keys(allSeatsData).length === 0) {
     return {};
   }
@@ -178,7 +178,7 @@ export const updateData = function(allSeatsData, region, seat) {
   return allSeatsData;
 };
 
-export const validateImportedDataFormat = function(data) {
+export const validateImportedDataFormat = (data) => {
   if (data instanceof Object && Object.keys(data).length > 0) {
     data["greenRegion"] && removeInvalidData(data, "greenRegion");
     data["blueRegion"] && removeInvalidData(data, "blueRegion");
@@ -187,7 +187,7 @@ export const validateImportedDataFormat = function(data) {
   return false;
 };
 
-const removeInvalidData = function(data, region) {
+const removeInvalidData = (data, region) => {
   if (
     data[region].length > 0 &&
     !data[region].reduce((acc, cur) => acc && cur instanceof Object)
