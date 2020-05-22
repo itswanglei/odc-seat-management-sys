@@ -55,7 +55,7 @@
 <script>
 import { Notification } from "element-ui";
 import { mapState } from "vuex";
-import { getSeatsInfoByDeviceNumber } from "../js/dataProcessor";
+import { deviceNumberExistanceCheck } from "../js/dataProcessor";
 
 export default {
   data() {
@@ -170,13 +170,17 @@ export default {
       done();
     },
     validateDeviceNumber(rule, value, callback) {
+      const isValidFormat = value && !/^\d{8}$/.test(value);
       const isUpdated = this.originForm[rule.field] !== value;
-      const results = getSeatsInfoByDeviceNumber(value, this.allSeatsData);
+      const existanceCheckResult = deviceNumberExistanceCheck(
+        value,
+        this.allSeatsData
+      );
 
-      if (!/^\d{8}$/.test(value)) {
+      if (isValidFormat) {
         callback(new Error("设备编号应为8位数字"));
-      } else if (isUpdated && results.length > 0) {
-        callback(new Error(`此编号已登记于${results.join("、")}`));
+      } else if (isUpdated && existanceCheckResult.length > 0) {
+        callback(new Error(`此编号已登记于${existanceCheckResult.join("、")}`));
       } else {
         callback();
       }

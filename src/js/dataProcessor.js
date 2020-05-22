@@ -196,13 +196,13 @@ const removeInvalidData = (data, region) => {
   }
 };
 
-export const getSeatsInfoByDeviceNumber = (keywords, allSeatsData) => {
+export const deviceNumberExistanceCheck = (keywords, allSeatsData) => {
   const regionNameMap = {
     greenRegion: "绿区",
     blueRegion: "蓝区",
   };
 
-  let seatsInfo = [];
+  const checkResult = [];
 
   if (allSeatsData && Object.keys(allSeatsData).length > 0) {
     const regions = Object.keys(allSeatsData);
@@ -213,10 +213,10 @@ export const getSeatsInfoByDeviceNumber = (keywords, allSeatsData) => {
         const matchedSeats = regionData
           .filter((item) => Object.values(item).includes(keywords))
           .map((item) => `${regionName}座位${item.seatId}`);
-        seatsInfo = seatsInfo.concat(...matchedSeats);
+        checkResult.push(...matchedSeats);
       }
     });
   }
 
-  return seatsInfo;
+  return checkResult;
 };
