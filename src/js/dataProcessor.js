@@ -70,14 +70,14 @@ const getBlueRegionData = (originalData) => {
     originalData
   );
   return {
-    tableA: completeData.slice(0, 12),
-    tableB: completeData.slice(12, 20),
-    tableC: completeData.slice(20, 28),
-    tableD: completeData.slice(28, 38),
-    tableE: completeData.slice(38, 46),
-    tableF: completeData.slice(46, 52),
-    tableG: completeData.slice(52, 57),
-    tableH: completeData.slice(57, 63),
+    tableA: completeData.slice(0, 10),
+    tableB: completeData.slice(10, 18),
+    tableC: completeData.slice(18, 26),
+    tableD: completeData.slice(26, 36),
+    tableE: completeData.slice(36, 44),
+    tableF: completeData.slice(44, 50),
+    tableG: completeData.slice(50, 55),
+    tableH: completeData.slice(55, 61),
   };
 };
 
