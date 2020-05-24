@@ -114,7 +114,7 @@ const groupSeatsByTable = (seats) => {
   return seatGroups;
 };
 
-export const getStatistics = (allSeatsData, region) => {
+export const getSeatsStatistics = (allSeatsData, region) => {
   const result = {
     total: 0,
     availiable: 0,
@@ -222,4 +222,39 @@ export const deviceNumberExistanceCheck = (keywords, allSeatsData) => {
   }
 
   return checkResult;
+};
+
+export const getDeviceStatistics = (allSeatsData, region, device) => {
+  const result = {
+    total: 0,
+    availiable: 0,
+    occupied: 0,
+    utilization: "0%",
+  };
+
+  if (!allSeatsData || Object.keys(allSeatsData).length === 0) {
+    return result;
+  }
+
+  const regionData = allSeatsData[region];
+
+  if (!regionData || regionData.length === 0) {
+    return result;
+  }
+
+  const matchedSeats = regionData.filter(
+    (item) =>
+      item[device] ||
+      item[`${device}1`] ||
+      item[`${device}2`] ||
+      item[`${device}3`]
+  );
+
+  result.total = matchedSeats.length;
+  result.availiable = matchedSeats.filter((item) => !item.user).length;
+  result.occupied = matchedSeats.filter((item) => item.user).length;
+  result.utilization =
+    ((result.occupied / result.total) * 100).toFixed(2) + " %";
+
+  return result;
 };

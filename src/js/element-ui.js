@@ -10,6 +10,8 @@ import {
   Dialog,
   Divider,
   Popover,
+  Table,
+  TableColumn,
 } from "element-ui";
 
 Vue.use(Menu);
@@ -22,3 +24,5 @@ Vue.use(Button);
 Vue.use(Dialog);
 Vue.use(Divider);
 Vue.use(Popover);
+Vue.use(Table);
+Vue.use(TableColumn);

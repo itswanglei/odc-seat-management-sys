@@ -51,7 +51,7 @@
 import { Notification } from "element-ui";
 
 import { mapState } from "vuex";
-import { getRegionData, getStatistics } from "./js/dataProcessor";
+import { getRegionData, getSeatsStatistics } from "./js/dataProcessor";
 
 export default {
   name: "App",
@@ -65,7 +65,7 @@ export default {
   computed: {
     ...mapState(["allSeatsData"]),
     statistics() {
-      return getStatistics(this.allSeatsData, this.$route.name);
+      return getSeatsStatistics(this.allSeatsData, this.$route.name);
     },
     seatsData() {
       return getRegionData(this.allSeatsData, this.$route.name);

@@ -162,6 +162,7 @@ export default {
             title: "保存成功"
           });
           this.handleClose(formName);
+          this.$emit("update-device-statistics");
         }
       });
     },
