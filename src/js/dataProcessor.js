@@ -135,8 +135,9 @@ export const getSeatsStatistics = (allSeatsData, region) => {
   result.total = regionData.length;
   result.availiable = regionData.filter((item) => !item.user).length;
   result.occupied = regionData.filter((item) => item.user).length;
-  result.utilization =
-    ((result.occupied / result.total) * 100).toFixed(2) + " %";
+  result.utilization = result.total
+    ? ((result.occupied / result.total) * 100).toFixed(2) + " %"
+    : "0 %";
 
   return result;
 };
@@ -253,8 +254,9 @@ export const getDeviceStatistics = (allSeatsData, region, device) => {
   result.total = matchedSeats.length;
   result.availiable = matchedSeats.filter((item) => !item.user).length;
   result.occupied = matchedSeats.filter((item) => item.user).length;
-  result.utilization =
-    ((result.occupied / result.total) * 100).toFixed(2) + " %";
+  result.utilization = result.total
+    ? ((result.occupied / result.total) * 100).toFixed(2) + " %"
+    : "0 %";
 
   return result;
 };

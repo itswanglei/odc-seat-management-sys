@@ -23,7 +23,11 @@ export default {
   data() {
     const monitor = getDeviceStatistics(this.data, this.$route.name, "monitor");
     const macmini = getDeviceStatistics(this.data, this.$route.name, "macmini");
-    const tc = getDeviceStatistics(this.data, this.$route.name, "tc");
+    const tcpc = getDeviceStatistics(
+      this.data,
+      this.$route.name,
+      this.$route.name === "greenRegion" ? "tc" : "pc"
+    );
 
     return {
       tableData: [
@@ -36,8 +40,8 @@ export default {
           ...macmini
         },
         {
-          deviceType: "TC",
-          ...tc
+          deviceType: this.$route.name === "greenRegion" ? "TC" : "PC",
+          ...tcpc
         }
       ]
     };

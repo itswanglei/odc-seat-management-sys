@@ -1,5 +1,5 @@
 <template>
-  <div class="green-region-wrapper">
+  <div class="region-wrapper">
     <device-statistics-table class="device-statistics-table" :data="allSeatsData" ref="table"></device-statistics-table>
     <div class="green-region">
       <div class="horizontal-region">
@@ -70,15 +70,15 @@ export default {
     updateDeviceStatistics() {
       const monitor = getDeviceStatistics(
         this.allSeatsData,
-        "greenRegion",
+        this.$route.name,
         "monitor"
       );
       const macmini = getDeviceStatistics(
         this.allSeatsData,
-        "greenRegion",
+        this.$route.name,
         "macmini"
       );
-      const tc = getDeviceStatistics(this.allSeatsData, "greenRegion", "tc");
+      const tc = getDeviceStatistics(this.allSeatsData, this.$route.name, "tc");
 
       const table = this.$refs["table"];
       table.$set(table.tableData, 0, {
@@ -90,7 +90,7 @@ export default {
         ...macmini
       });
       table.$set(table.tableData, 2, {
-        deviceType: "tc",
+        deviceType: "TC",
         ...tc
       });
     }
@@ -99,7 +99,7 @@ export default {
 </script>
 
 <style>
-.green-region-wrapper {
+.region-wrapper {
   position: relative;
 }
 
