@@ -19,6 +19,8 @@
           <span>空闲 {{statistics.availiable}}</span>
           <el-divider direction="vertical"></el-divider>
           <span>已占用 {{statistics.occupied}}</span>
+          <el-divider direction="vertical"></el-divider>
+          <span>利用率 {{statistics.utilization}}</span>
         </div>
       </el-menu-item>
       <el-menu-item class="button-group">

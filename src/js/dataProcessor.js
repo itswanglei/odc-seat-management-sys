@@ -119,6 +119,7 @@ export const getStatistics = (allSeatsData, region) => {
     total: 0,
     availiable: 0,
     occupied: 0,
+    utilization: "0%",
   };
 
   if (!allSeatsData || Object.keys(allSeatsData).length === 0) {
@@ -134,6 +135,8 @@ export const getStatistics = (allSeatsData, region) => {
   result.total = regionData.length;
   result.availiable = regionData.filter((item) => !item.user).length;
   result.occupied = regionData.filter((item) => item.user).length;
+  result.utilization =
+    ((result.occupied / result.total) * 100).toFixed(2) + " %";
 
   return result;
 };
