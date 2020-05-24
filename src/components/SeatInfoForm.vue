@@ -179,7 +179,7 @@ export default {
 
       if (isValidFormat) {
         callback(new Error("设备编号应为8位数字"));
-      } else if (isUpdated && existanceCheckResult.length > 0) {
+      } else if (value && isUpdated && existanceCheckResult.length > 0) {
         callback(new Error(`此编号已登记于${existanceCheckResult.join("、")}`));
       } else {
         callback();
