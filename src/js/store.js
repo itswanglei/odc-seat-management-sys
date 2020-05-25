@@ -56,7 +56,7 @@ export default new Vuex.Store({
 
 function localStoragePlugin(store) {
   store.subscribe((mutation, state) => {
-    if (["updateSeatsData", "reloadSeatsData"].includes(mutation.type)) {
+    if (["updateSeatsData", "importSeatsData"].includes(mutation.type)) {
       localStorage.setItem(
         "odc-seats-management-sys",
         JSON.stringify(state.allSeatsData)
