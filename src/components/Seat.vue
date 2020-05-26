@@ -25,9 +25,9 @@
 
 <script>
 import { mapState } from "vuex";
-import availableSeatImg from "../assets/available-seat.svg";
-import occupiedSeatImg from "../assets/occupied-seat.svg";
-import pickedSeatImg from "../assets/pickedSeat.svg";
+import availableSeatImg from "../assets/images/available-seat.svg";
+import occupiedSeatImg from "../assets/images/occupied-seat.svg";
+import pickedSeatImg from "../assets/images/pickedSeat.svg";
 
 export default {
   props: {
