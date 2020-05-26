@@ -55,7 +55,7 @@
 <script>
 import { Notification } from "element-ui";
 import { mapState } from "vuex";
-import { deviceNumberExistanceCheck } from "../js/dataProcessor";
+import { checkDeviceNumberExistance } from "../js/dataProcessor";
 
 export default {
   data() {
@@ -173,7 +173,7 @@ export default {
     validateDeviceNumber(rule, value, callback) {
       const isValidFormat = value && !/^\d{8}$/.test(value);
       const isUpdated = this.originForm[rule.field] !== value;
-      const existanceCheckResult = deviceNumberExistanceCheck(
+      const existanceCheckResult = checkDeviceNumberExistance(
         value,
         this.allSeatsData
       );

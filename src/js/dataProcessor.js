@@ -177,7 +177,7 @@ const isEachSeatInfoValid = (seats) => {
   );
 };
 
-export const deviceNumberExistanceCheck = (keywords, allSeatsData) => {
+export const checkDeviceNumberExistance = (keywords, allSeatsData) => {
   const regionNameMap = {
     greenRegion: "绿区",
     blueRegion: "蓝区",
