@@ -132,11 +132,7 @@ export const updateData = (allSeatsData, region, seat) => {
 
   const index = regionData.findIndex((item) => item.seatId === seat.seatId);
 
-  if (index === -1) {
-    return {};
-  }
-
-  regionData.splice(index, 1, seat);
+  index !== -1 && regionData.splice(index, 1, seat);
 
   allSeatsData[region] = regionData;
 
