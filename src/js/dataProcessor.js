@@ -149,16 +149,36 @@ export const validateImportedDataFormat = (data) => {
     data["blueRegion"] && removeInvalidData(data, "blueRegion");
     return data;
   }
-  return false;
+  return null;
 };
 
 const removeInvalidData = (data, region) => {
-  if (
-    data[region].length > 0 &&
-    !data[region].reduce((acc, cur) => acc && cur instanceof Object)
-  ) {
+  if (data[region].length > 0 && !isEachSeatInfoValid(data[region])) {
     delete data[region];
   }
+};
+
+const isEachSeatInfoValid = (seats) => {
+  const seatAttrs = [
+    "seatId",
+    "monitor1",
+    "monitor2",
+    "monitor3",
+    "macmini1",
+    "macmini2",
+    "tc",
+    "pc",
+    "user",
+    "phone",
+  ];
+  return seats.reduce(
+    (acc, cur) =>
+      acc &&
+      cur instanceof Object &&
+      Object.keys(cur)
+        .sort()
+        .toString() === seatAttrs.sort().toString()
+  );
 };
 
 export const deviceNumberExistanceCheck = (keywords, allSeatsData) => {
