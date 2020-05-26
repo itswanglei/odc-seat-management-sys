@@ -140,14 +140,14 @@ export default {
 .device-statistics-table {
   position: absolute;
   left: 10px;
-  top: -30px;
+  top: -60px;
 }
 
 .blue-region {
   position: relative;
   top: 50px;
   height: 400px;
-  margin: 50px 350px;
+  margin: 80px 350px;
   display: flex;
   flex-direction: column-reverse;
   align-items: flex-start;
