@@ -1,7 +1,7 @@
 import initalSeatsData from "../assets/data.json";
 
 const Green_Region_Total_Seats = 250;
-const Blue_Region_Total_Seats = 63;
+const Blue_Region_Total_Seats = 61;
 
 export const initalizeData = () => {
   let allSeatsData = JSON.parse(
@@ -26,19 +26,7 @@ export const initalizeData = () => {
 export const getRegionData = (allSeatsData, region) => {
   let result = {};
 
-  if (!allSeatsData || Object.keys(allSeatsData).length === 0) {
-    result = {};
-  }
-
   const originalData = allSeatsData[region];
-
-  if (
-    !originalData ||
-    !Array.isArray(originalData) ||
-    originalData.length === 0
-  ) {
-    result = {};
-  }
 
   if (region === "greenRegion") {
     result = getGreenRegionData(originalData);
@@ -122,15 +110,7 @@ export const getSeatsStatistics = (allSeatsData, region) => {
     utilization: "0%",
   };
 
-  if (!allSeatsData || Object.keys(allSeatsData).length === 0) {
-    return result;
-  }
-
   const regionData = allSeatsData[region];
-
-  if (!regionData || regionData.length === 0) {
-    return result;
-  }
 
   result.total = regionData.length;
   result.availiable = regionData.filter((item) => !item.user).length;
@@ -143,15 +123,7 @@ export const getSeatsStatistics = (allSeatsData, region) => {
 };
 
 export const getSeatsIdByKeywords = (keywords, allSeatsData, region) => {
-  if (!allSeatsData || Object.keys(allSeatsData).length === 0) {
-    return [];
-  }
-
   const regionData = allSeatsData[region];
-
-  if (!regionData || regionData.length === 0) {
-    return [];
-  }
 
   return regionData
     .filter((item) => Object.values(item).includes(keywords))
@@ -159,15 +131,7 @@ export const getSeatsIdByKeywords = (keywords, allSeatsData, region) => {
 };
 
 export const updateData = (allSeatsData, region, seat) => {
-  if (!allSeatsData || Object.keys(allSeatsData).length === 0) {
-    return {};
-  }
-
   const regionData = allSeatsData[region];
-
-  if (!regionData || regionData.length === 0) {
-    return {};
-  }
 
   const index = regionData.findIndex((item) => item.seatId === seat.seatId);
 
@@ -208,19 +172,16 @@ export const deviceNumberExistanceCheck = (keywords, allSeatsData) => {
 
   const checkResult = [];
 
-  if (allSeatsData && Object.keys(allSeatsData).length > 0) {
-    const regions = Object.keys(allSeatsData);
-    regions.forEach((region) => {
-      const regionName = regionNameMap[region] || "";
-      const regionData = allSeatsData[region];
-      if (regionData && regionData.length > 0) {
-        const matchedSeats = regionData
-          .filter((item) => Object.values(item).includes(keywords))
-          .map((item) => `${regionName}座位${item.seatId}`);
-        checkResult.push(...matchedSeats);
-      }
-    });
-  }
+  const regions = Object.keys(allSeatsData);
+
+  regions.forEach((region) => {
+    const regionName = regionNameMap[region] || "";
+    const regionData = allSeatsData[region];
+    const matchedSeats = regionData
+      .filter((item) => Object.values(item).includes(keywords))
+      .map((item) => `${regionName}座位${item.seatId}`);
+    checkResult.push(...matchedSeats);
+  });
 
   return checkResult;
 };
@@ -233,15 +194,7 @@ export const getDeviceStatistics = (allSeatsData, region, device) => {
     utilization: "0%",
   };
 
-  if (!allSeatsData || Object.keys(allSeatsData).length === 0) {
-    return result;
-  }
-
   const regionData = allSeatsData[region];
-
-  if (!regionData || regionData.length === 0) {
-    return result;
-  }
 
   const matchedSeats = regionData.filter(
     (item) =>
