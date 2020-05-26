@@ -9,10 +9,7 @@ export const initalizeData = () => {
   );
 
   if (!allSeatsData) {
-    allSeatsData =
-      !initalSeatsData || Object.keys(initalSeatsData).length === 0
-        ? {}
-        : initalSeatsData;
+    allSeatsData = initalSeatsData;
 
     localStorage.setItem(
       "odc-seats-management-sys",
