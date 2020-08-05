@@ -113,6 +113,7 @@ export default {
 
 .sub-group {
   display: flex;
+  justify-content: center;
 }
 
 .top-to-bottom {

@@ -2,6 +2,7 @@ import initalSeatsData from "../assets/data.json";
 
 const Green_Region_Total_Seats = 250;
 const Yellow_Region_Total_Seats = 61;
+const Blue_Region_Total_Seats = 158;
 
 export const initalizeData = () => {
   let allSeatsData = JSON.parse(
@@ -33,8 +34,26 @@ export const getRegionData = (allSeatsData, region) => {
     result = getyellowRegionData(originalData);
   }
 
+  if (region === "blueRegion") {
+    result = getBlueRegionData(originalData);
+  }
+
   return result;
 };
+
+export const getBlueRegionData = (originalData) => {
+  const completeData = complementRegionData(
+      Blue_Region_Total_Seats,
+      originalData
+  );
+
+  return {
+    tableA: completeData.slice(90, 98),
+    subRegion1: groupSeatsByTable(completeData.slice(0, 90)),
+    subRegion2: groupSeatsByTable(completeData.slice(98, 138)),
+    subRegion3: groupSeatsByTable(completeData.slice(138, 158)),
+  }
+}
 
 const getGreenRegionData = (originalData) => {
   const completeData = complementRegionData(
