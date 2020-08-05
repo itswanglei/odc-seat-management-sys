@@ -1,7 +1,7 @@
 import initalSeatsData from "../assets/data.json";
 
 const Green_Region_Total_Seats = 250;
-const Blue_Region_Total_Seats = 61;
+const Yellow_Region_Total_Seats = 61;
 
 export const initalizeData = () => {
   let allSeatsData = JSON.parse(
@@ -29,8 +29,8 @@ export const getRegionData = (allSeatsData, region) => {
     result = getGreenRegionData(originalData);
   }
 
-  if (region === "blueRegion") {
-    result = getBlueRegionData(originalData);
+  if (region === "yellowRegion") {
+    result = getyellowRegionData(originalData);
   }
 
   return result;
@@ -49,9 +49,9 @@ const getGreenRegionData = (originalData) => {
   };
 };
 
-const getBlueRegionData = (originalData) => {
+const getyellowRegionData = (originalData) => {
   const completeData = complementRegionData(
-    Blue_Region_Total_Seats,
+    Yellow_Region_Total_Seats,
     originalData
   );
   return {
@@ -142,7 +142,7 @@ export const updateData = (allSeatsData, region, seat) => {
 export const validateImportedDataFormat = (data) => {
   if (data instanceof Object && Object.keys(data).length > 0) {
     data["greenRegion"] && removeInvalidData(data, "greenRegion");
-    data["blueRegion"] && removeInvalidData(data, "blueRegion");
+    data["yellowRegion"] && removeInvalidData(data, "yellowRegion");
     return data;
   }
   return null;
@@ -180,7 +180,7 @@ const isEachSeatInfoValid = (seats) => {
 export const checkDeviceNumberExistance = (keywords, allSeatsData) => {
   const regionNameMap = {
     greenRegion: "绿区",
-    blueRegion: "蓝区",
+    yellowRegion: "黄区",
   };
 
   const checkResult = [];

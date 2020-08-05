@@ -8,7 +8,7 @@
       <p>Mac mini #1：{{seat.macmini1}}</p>
       <p>Mac mini #2：{{seat.macmini2}}</p>
       <p v-if="region === 'greenRegion'">TC 盒子：{{seat.tc}}</p>
-      <p v-if="region === 'blueRegion'">PC：{{seat.pc}}</p>
+      <p v-if="region === 'yellowRegion'">PC：{{seat.pc}}</p>
       <p>使用人：{{seat.user}}</p>
       <p>联系电话：{{seat.phone}}</p>
     </div>

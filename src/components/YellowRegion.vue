@@ -1,7 +1,7 @@
 <template>
   <div class="region-wrapper">
     <device-statistics-table class="device-statistics-table" :data="allSeatsData" ref="table"></device-statistics-table>
-    <div class="blue-region">
+    <div class="yellow-region">
       <div class="row-1">
         <seat-group
           :seats="seatsData.tableA"
@@ -143,7 +143,7 @@ export default {
   top: -60px;
 }
 
-.blue-region {
+.yellow-region {
   position: relative;
   top: 50px;
   height: 400px;
