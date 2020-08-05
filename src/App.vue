@@ -9,7 +9,7 @@
           placeholder="搜索座位编号、设备编号、使用人"
           prefix-icon="el-icon-search"
           v-model="keywords"
-          @keyup.enter.native="search"
+          @keyup.native="search"
         ></el-input>
       </el-menu-item>
       <el-menu-item>

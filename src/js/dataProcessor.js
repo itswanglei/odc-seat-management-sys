@@ -123,7 +123,7 @@ export const getSeatsIdByKeywords = (keywords, allSeatsData, region) => {
   const regionData = allSeatsData[region];
 
   return regionData
-    .filter((item) => Object.values(item).includes(keywords))
+    .filter((item) => Object.values(item).some(val => val.includes(keywords)))
     .map((item) => item.seatId);
 };
 
