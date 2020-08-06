@@ -69,7 +69,6 @@ export default {
       return getSeatsStatistics(this.allSeatsData, this.$route.name);
     },
     seatsData() {
-      console.log(JSON.parse(JSON.stringify(getRegionData(this.allSeatsData, this.$route.name))))
       return getRegionData(this.allSeatsData, this.$route.name);
     }
   },

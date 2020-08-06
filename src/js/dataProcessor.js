@@ -162,6 +162,7 @@ export const validateImportedDataFormat = (data) => {
   if (data instanceof Object && Object.keys(data).length > 0) {
     data["greenRegion"] && removeInvalidData(data, "greenRegion");
     data["yellowRegion"] && removeInvalidData(data, "yellowRegion");
+    data["blueRegion"] && removeInvalidData(data, "blueRegion");
     return data;
   }
   return null;
@@ -200,6 +201,7 @@ export const checkDeviceNumberExistance = (keywords, allSeatsData) => {
   const regionNameMap = {
     greenRegion: "绿区",
     yellowRegion: "黄区",
+    blueRegion: "蓝区",
   };
 
   const checkResult = [];
