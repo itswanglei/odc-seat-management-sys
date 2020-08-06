@@ -145,6 +145,7 @@ export default {
 
 .yellow-region {
   position: relative;
+  padding-top: 100px;
   top: 50px;
   height: 400px;
   margin: 80px 350px;
