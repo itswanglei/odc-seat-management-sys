@@ -26,8 +26,8 @@ export default {
       type: Object,
       default() {
         return {};
-      }
-    }
+      },
+    },
   },
   data() {
     const monitor = getDeviceStatistics(this.data, this.$route.name, "monitor");
@@ -42,38 +42,46 @@ export default {
       tableData: [
         {
           deviceType: "显示器",
-          ...monitor
+          ...monitor,
         },
         {
           deviceType: "Mac mini",
-          ...macmini
+          ...macmini,
         },
         {
           deviceType: this.$route.name === "greenRegion" ? "TC" : "PC",
-          ...tcpc
-        }
+          ...tcpc,
+        },
       ],
       switchFrom: "",
-      switchTo: ""
+      switchTo: "",
     };
   },
-  methods:{
-    switchAction(){
-      this.$store.dispatch("switchSeat", {
-        from: this.switchFrom,
-        to: this.switchTo,
-        region: this.$route.name
-      }).then(res => {
-        if(res){
-          Notification.success({
-            title: "交换成功"
-          });
-        }
-      })
-    }
-  }
+  methods: {
+    switchAction() {
+      this.$store
+        .dispatch("switchSeat", {
+          from: this.switchFrom,
+          to: this.switchTo,
+          region: this.$route.name,
+        })
+        .then((res) => {
+          if (res) {
+            Notification.success({
+              title: "交换成功",
+            });
+          }
+        });
+    },
+  },
 };
 </script>
+
+<style>
+.switch-seat .el-input {
+  width: auto;
+}
+</style>
 
 <style scoped>
 .device-statistics-table-wrapper {
