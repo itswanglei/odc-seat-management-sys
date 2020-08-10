@@ -43,8 +43,8 @@ export const getRegionData = (allSeatsData, region) => {
 
 export const getBlueRegionData = (originalData) => {
   const completeData = complementRegionData(
-      Blue_Region_Total_Seats,
-      originalData
+    Blue_Region_Total_Seats,
+    originalData
   );
 
   return {
@@ -52,8 +52,8 @@ export const getBlueRegionData = (originalData) => {
     subRegion1: groupSeatsByTable(completeData.slice(0, 90)),
     subRegion2: groupSeatsByTable(completeData.slice(98, 138)),
     subRegion3: groupSeatsByTable(completeData.slice(138, 158)),
-  }
-}
+  };
+};
 
 const getGreenRegionData = (originalData) => {
   const completeData = complementRegionData(
@@ -142,7 +142,7 @@ export const getSeatsIdByKeywords = (keywords, allSeatsData, region) => {
   const regionData = allSeatsData[region];
 
   return regionData
-    .filter((item) => Object.values(item).some(val => val.includes(keywords)))
+    .filter((item) => Object.values(item).some((val) => val.includes(keywords)))
     .map((item) => item.seatId);
 };
 
@@ -191,9 +191,7 @@ const isEachSeatInfoValid = (seats) => {
     (acc, cur) =>
       acc &&
       cur instanceof Object &&
-      Object.keys(cur)
-        .sort()
-        .toString() === seatAttrs.sort().toString()
+      Object.keys(cur).sort().toString() === seatAttrs.sort().toString()
   );
 };
 
