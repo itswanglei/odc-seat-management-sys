@@ -36,6 +36,25 @@ export default new Vuex.Store({
         state.allSeatsData = Object.assign({}, seatsData);
       }
     },
+    switchSeat(state, { region, from, to, resolve }) {
+      const fromData = state.allSeatsData[region].find(item => item.seatId === from);
+      const toData = state.allSeatsData[region].find(item => item.seatId === to);
+
+      const switchData = (fromData, toData, fields) => {
+        fields.forEach(field => {
+          const tmp = fromData[field]
+          fromData[field] = toData[field]
+          toData[field] = tmp;
+        })
+      }
+
+      if (fromData && toData) {
+        switchData(fromData, toData, ["user", "seatId", "phone", "tc", "pc", "macmini1", "macmini2"]);
+        resolve(true);
+      }
+
+      resolve(false);
+    }
   },
   actions: {
     searchSeats({ commit }, payload) {
@@ -50,6 +69,11 @@ export default new Vuex.Store({
     importSeatsData({ commit }, seatsData) {
       commit("importSeatsData", seatsData);
     },
+    switchSeat({ commit }, payload) {
+      return new Promise(resolve => {
+        commit("switchSeat", Object.assign(payload, { resolve }));
+      })
+    }
   },
   plugins: [localStoragePlugin],
 });

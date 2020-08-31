@@ -2,68 +2,44 @@
   <div class="region-wrapper">
     <device-statistics-table class="device-statistics-table" :data="allSeatsData" ref="table"></device-statistics-table>
     <div class="blue-region">
-      <div class="row-1">
+      <div class="vertical-region">
         <seat-group
-          :seats="seatsData.tableA"
-          @edit-seat-info="openEditDialog"
-          orientation="horizontal"
-          firstSeatPosition="southeast"
-        ></seat-group>
-        <seat-group
-          :seats="seatsData.tableB"
-          @edit-seat-info="openEditDialog"
-          orientation="horizontal"
-          firstSeatPosition="southeast"
-        ></seat-group>
-        <seat-group
-          :seats="seatsData.tableC"
-          @edit-seat-info="openEditDialog"
-          orientation="horizontal"
-          order="counterclockwise"
-        ></seat-group>
-      </div>
-      <div class="row-2">
-        <seat-group
-          :seats="seatsData.tableD"
-          @edit-seat-info="openEditDialog"
-          orientation="horizontal"
-          firstSeatPosition="southeast"
-        ></seat-group>
-      </div>
-      <div class="row-3">
-        <div class="col-1">
-          <seat-group
-            :seats="seatsData.tableE"
+            :seats="seatsData.tableA"
             @edit-seat-info="openEditDialog"
             order="counterclockwise"
             firstSeatPosition="northwest"
+            class="row-1"
+        ></seat-group>
+        <seat-group
+            v-for="(seats, index) in seatsData.subRegion1"
+            :key="'r1'+index"
+            :seats="seats"
+            @edit-seat-info="openEditDialog"
+        ></seat-group>
+      </div>
+      <div class="vertical-region">
+        <div class="group">
+          <seat-group
+              v-for="(seats, index) in seatsData.subRegion3"
+              :key="'r3'+index"
+              :seats="seats"
+              @edit-seat-info="openEditDialog"
+              orientation="horizontal"
+              order="counterclockwise"
           ></seat-group>
         </div>
-        <div class="col-2">
-          <seat-group
-            :seats="seatsData.tableF"
+        <seat-group
+            v-for="(seats, index) in seatsData.subRegion2"
+            :key="'r2'+index"
+            :seats="seats"
             @edit-seat-info="openEditDialog"
-            order="counterclockwise"
-            firstSeatPosition="northwest"
-          ></seat-group>
-          <seat-group
-            :seats="seatsData.tableG"
-            @edit-seat-info="openEditDialog"
-            order="counterclockwise"
-            firstSeatPosition="northwest"
-          ></seat-group>
-          <seat-group
-            :seats="seatsData.tableH"
-            @edit-seat-info="openEditDialog"
-            order="counterclockwise"
-            firstSeatPosition="northwest"
-          ></seat-group>
-        </div>
+        ></seat-group>
       </div>
-      <seat-info-form ref="dialog" @update-device-statistics="updateDeviceStatistics"></seat-info-form>
     </div>
+    <seat-info-form ref="dialog" @update-device-statistics="updateDeviceStatistics"></seat-info-form>
   </div>
 </template>
+
 <script>
 import { mapState } from "vuex";
 import SeatGroup from "./SeatGroup";
@@ -83,13 +59,9 @@ export default {
       default() {
         return {
           tableA: [],
-          tableB: [],
-          tableC: [],
-          tableD: [],
-          tableE: [],
-          tableF: [],
-          tableG: [],
-          tableH: []
+          subRegion1: [],
+          subRegion2: [],
+          subRegion3: []
         };
       }
     }
@@ -112,7 +84,7 @@ export default {
         this.$route.name,
         "macmini"
       );
-      const pc = getDeviceStatistics(this.allSeatsData, this.$route.name, "pc");
+      const tc = getDeviceStatistics(this.allSeatsData, this.$route.name, "tc");
 
       const table = this.$refs["table"];
       table.$set(table.tableData, 0, {
@@ -124,15 +96,15 @@ export default {
         ...macmini
       });
       table.$set(table.tableData, 2, {
-        deviceType: "PC",
-        ...pc
+        deviceType: "TC",
+        ...tc
       });
     }
   }
 };
 </script>
 
-<style scoped>
+<style>
 .region-wrapper {
   position: relative;
 }
@@ -140,39 +112,27 @@ export default {
 .device-statistics-table {
   position: absolute;
   left: 10px;
-  top: -60px;
 }
 
 .blue-region {
-  position: relative;
-  top: 50px;
-  height: 400px;
-  margin: 80px 350px;
+  margin: 20px;
   display: flex;
-  flex-direction: column-reverse;
-  align-items: flex-start;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 200px;
+}
+
+.vertical-region{
+  margin: 20px;
 }
 
 .row-1 {
   width: 100%;
   display: flex;
   flex-direction: row-reverse;
-  justify-content: space-between;
 }
 
-.row-3 {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-
-.col-1 {
-  margin-left: 180px;
-}
-
-.col-2 {
-  height: 90px;
-  display: flex;
+.group{
+  margin-right: 40px;
 }
 </style>

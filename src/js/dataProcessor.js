@@ -1,7 +1,8 @@
 import initalSeatsData from "../assets/data.json";
 
 const Green_Region_Total_Seats = 250;
-const Blue_Region_Total_Seats = 61;
+const Yellow_Region_Total_Seats = 61;
+const Blue_Region_Total_Seats = 158;
 
 export const initalizeData = () => {
   let allSeatsData = JSON.parse(
@@ -29,11 +30,29 @@ export const getRegionData = (allSeatsData, region) => {
     result = getGreenRegionData(originalData);
   }
 
+  if (region === "yellowRegion") {
+    result = getyellowRegionData(originalData);
+  }
+
   if (region === "blueRegion") {
     result = getBlueRegionData(originalData);
   }
 
   return result;
+};
+
+export const getBlueRegionData = (originalData) => {
+  const completeData = complementRegionData(
+    Blue_Region_Total_Seats,
+    originalData
+  );
+
+  return {
+    tableA: completeData.slice(90, 98),
+    subRegion1: groupSeatsByTable(completeData.slice(0, 90)),
+    subRegion2: groupSeatsByTable(completeData.slice(98, 138)),
+    subRegion3: groupSeatsByTable(completeData.slice(138, 158)),
+  };
 };
 
 const getGreenRegionData = (originalData) => {
@@ -49,9 +68,9 @@ const getGreenRegionData = (originalData) => {
   };
 };
 
-const getBlueRegionData = (originalData) => {
+const getyellowRegionData = (originalData) => {
   const completeData = complementRegionData(
-    Blue_Region_Total_Seats,
+    Yellow_Region_Total_Seats,
     originalData
   );
   return {
@@ -123,7 +142,7 @@ export const getSeatsIdByKeywords = (keywords, allSeatsData, region) => {
   const regionData = allSeatsData[region];
 
   return regionData
-    .filter((item) => Object.values(item).includes(keywords))
+    .filter((item) => Object.values(item).some((val) => val.includes(keywords)))
     .map((item) => item.seatId);
 };
 
@@ -142,6 +161,7 @@ export const updateData = (allSeatsData, region, seat) => {
 export const validateImportedDataFormat = (data) => {
   if (data instanceof Object && Object.keys(data).length > 0) {
     data["greenRegion"] && removeInvalidData(data, "greenRegion");
+    data["yellowRegion"] && removeInvalidData(data, "yellowRegion");
     data["blueRegion"] && removeInvalidData(data, "blueRegion");
     return data;
   }
@@ -171,15 +191,14 @@ const isEachSeatInfoValid = (seats) => {
     (acc, cur) =>
       acc &&
       cur instanceof Object &&
-      Object.keys(cur)
-        .sort()
-        .toString() === seatAttrs.sort().toString()
+      Object.keys(cur).sort().toString() === seatAttrs.sort().toString()
   );
 };
 
 export const checkDeviceNumberExistance = (keywords, allSeatsData) => {
   const regionNameMap = {
     greenRegion: "绿区",
+    yellowRegion: "黄区",
     blueRegion: "蓝区",
   };
 
