@@ -42,10 +42,7 @@ export default {
       tableData: [
         {
           deviceType: "显示器",
-          total: monitor.total * 2,
-          availiable: monitor.availiable * 2,
-          occupied: monitor.occupied * 2,
-          utilization: monitor.utilization,
+          ...monitor
         },
         {
           deviceType: "Mac mini",
@@ -76,6 +73,26 @@ export default {
           }
         });
     },
+    updateDeviceStatistics(seatsData, region) {
+      const monitor = getDeviceStatistics(seatsData, region, "monitor");
+      const macmini = getDeviceStatistics(seatsData, region, "macmini");
+      const tcpc = getDeviceStatistics(seatsData, region, region === "greenRegion" ? "tc" : "pc");
+
+      this.tableData = [
+        {
+          deviceType: "显示器",
+          ...monitor
+        },
+        {
+          deviceType: "Mac mini",
+          ...macmini,
+        },
+        {
+          deviceType: this.$route.name === "greenRegion" ? "TC" : "PC",
+          ...tcpc,
+        },
+      ];
+    }
   },
 };
 </script>

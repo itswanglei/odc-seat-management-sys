@@ -45,7 +45,6 @@ import { mapState } from "vuex";
 import SeatGroup from "./SeatGroup";
 import SeatInfoForm from "./SeatInfoForm";
 import DeviceStatisticsTable from "./DeviceStatisticsTable";
-import { getDeviceStatistics } from "../js/dataProcessor";
 
 export default {
   components: {
@@ -74,34 +73,8 @@ export default {
       this.$refs["dialog"].handleOpen(seatInfo);
     },
     updateDeviceStatistics() {
-      const monitor = getDeviceStatistics(
-        this.allSeatsData,
-        this.$route.name,
-        "monitor"
-      );
-      const macmini = getDeviceStatistics(
-        this.allSeatsData,
-        this.$route.name,
-        "macmini"
-      );
-      const tc = getDeviceStatistics(this.allSeatsData, this.$route.name, "tc");
-
       const table = this.$refs["table"];
-      table.$set(table.tableData, 0, {
-        deviceType: "显示器",
-        total: monitor.total * 2,
-        availiable: monitor.availiable * 2,
-        occupied: monitor.occupied * 2,
-        utilization: monitor.utilization,
-      });
-      table.$set(table.tableData, 1, {
-        deviceType: "Mac mini",
-        ...macmini
-      });
-      table.$set(table.tableData, 2, {
-        deviceType: "TC",
-        ...tc
-      });
+      table.updateDeviceStatistics(this.allSeatsData, "blueRegion");
     }
   }
 };
