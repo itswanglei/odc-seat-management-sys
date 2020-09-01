@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { Notification } from "element-ui";
+import { Message } from "element-ui";
 
 import { mapState } from "vuex";
 import { getRegionData, getSeatsStatistics } from "./js/dataProcessor";
@@ -98,9 +98,7 @@ export default {
       reader.onload = event => {
         const data = JSON.parse(event.target.result);
         this.$store.dispatch("importSeatsData", data);
-        Notification.success({
-          title: "导入成功"
-        });
+        Message.success("导入成功")
       };
       reader.readAsText(file);
     }
