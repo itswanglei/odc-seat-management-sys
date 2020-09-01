@@ -191,7 +191,9 @@ const isEachSeatInfoValid = (seats) => {
     (acc, cur) =>
       acc &&
       cur instanceof Object &&
-      Object.keys(cur).sort().toString() === seatAttrs.sort().toString()
+      Object.keys(cur)
+        .sort()
+        .toString() === seatAttrs.sort().toString()
   );
 };
 
@@ -235,6 +237,10 @@ export const getDeviceStatistics = (allSeatsData, region, device) => {
       item[`${device}2`] ||
       item[`${device}3`]
   );
+
+  if (!matchedSeats) {
+    return result;
+  }
 
   result.total = matchedSeats.length;
   result.availiable = matchedSeats.filter((item) => !item.user).length;
