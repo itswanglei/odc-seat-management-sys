@@ -117,7 +117,7 @@ export default {
 
 .horizontal-region {
   width: 320px;
-  margin: 20px 20px 20px 200px;
+  margin: 20px 20px 20px 700px;
   display: flex;
   flex-wrap: wrap-reverse;
   justify-content: space-between;
