@@ -45,7 +45,7 @@ export default {
           total: monitor.total * 2,
           availiable: monitor.availiable * 2,
           occupied: monitor.occupied * 2,
-          utilization: "0%",
+          utilization: monitor.utilization,
         },
         {
           deviceType: "Mac mini",

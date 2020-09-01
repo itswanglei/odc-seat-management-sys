@@ -89,7 +89,10 @@ export default {
       const table = this.$refs["table"];
       table.$set(table.tableData, 0, {
         deviceType: "显示器",
-        ...monitor
+        total: monitor.total * 2,
+        availiable: monitor.availiable * 2,
+        occupied: monitor.occupied * 2,
+        utilization: monitor.utilization,
       });
       table.$set(table.tableData, 1, {
         deviceType: "Mac mini",
