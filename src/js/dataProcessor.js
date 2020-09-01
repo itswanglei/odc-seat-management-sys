@@ -242,9 +242,16 @@ export const getDeviceStatistics = (allSeatsData, region, device) => {
     return result;
   }
 
-  result.total = matchedSeats.length;
-  result.availiable = matchedSeats.filter((item) => !item.user).length;
-  result.occupied = matchedSeats.filter((item) => item.user).length;
+  const reducer = (acc, cur) => {
+    (cur[device] || cur[`${device}1`]) && acc++;
+    cur[`${device}2`] && acc++;
+    cur[`${device}3`] && acc++;
+    return acc;
+  }
+
+  result.total = matchedSeats.reduce(reducer, 0);
+  result.availiable = matchedSeats.filter((item) => !item.user).reduce(reducer, 0);
+  result.occupied = matchedSeats.filter((item) => item.user).reduce(reducer, 0);
   result.utilization = result.total
     ? ((result.occupied / result.total) * 100).toFixed(2) + " %"
     : "0 %";
