@@ -115,7 +115,7 @@ export default {
   color: #909399;
   font-size: 14px;
   font-weight: bold;
-  padding: 12px 0;
+  padding: 12px 0 0 0;
 }
 
 .switch-seat > * {
