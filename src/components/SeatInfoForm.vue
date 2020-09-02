@@ -35,7 +35,7 @@
       <el-form-item v-if="region === 'greenRegion'" label="TC 盒子" prop="tc">
         <el-input v-model="form.tc"></el-input>
       </el-form-item>
-      <el-form-item v-if="region === 'yellowRegion' || 'blueRegion'" label="PC" prop="pc">
+      <el-form-item v-if="region === 'yellowRegion' || region === 'blueRegion'" label="PC" prop="pc">
         <el-input v-model="form.pc"></el-input>
       </el-form-item>
       <el-form-item label="使用人">
